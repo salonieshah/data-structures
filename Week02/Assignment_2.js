@@ -18,7 +18,7 @@ const fs = require('fs');
 
 //3. Load `content` into a cheerio object
     var text = cheerio.load(data);
-
+   
 
 //4. Get all indivisual addresses excluding the excess information
     text('tr tr tr').each(function(i, elem) {
@@ -27,16 +27,30 @@ const fs = require('fs');
         text(this).find('div').remove().html();
         text(this).find('detailsBox').remove().html();
         
-    
     console.log(text(elem).children().first().text().trim());
     });
     
-  
-//5. Make a variable containing string of the addresses
-    var parse = ''; 
+//5. Create a variable to contain an array of the addresses
+    var parse = []; 
     
-//6. Write the text file named Address_Attempt1.txt
+//6. Create a text file named Address_Attempt1.txt containing the location name and address
     text('tr tr tr').each(function(i, elem) {
-            parse += (text(elem).children().first().text().trim()) + '\n';
+        console.log(text(elem).text())
+         parse [i]= text(elem).children().first().text().split("<br>")[0].split("('')");    
         });
+       
     fs.writeFileSync('Address_Attempt1.txt', parse);
+    
+//7. Excess Code
+    // function getRid (text, separator) {
+    // var arrayOfStrings = text.split(separator);
+    
+    // var brackets = '()';
+    // var hyphen = '-';
+    
+    // getRid(parse, hyphen);
+    // }
+    
+    // var splitSymbol = parse.split(-);
+    // var split = text.split(/[ - .:;?!~,`"&|()<>{}\[\]\r\n/\\]+/);
+    
