@@ -1032,7 +1032,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>AA LITERATURE - AA Literature</b><br />
-						122 East 37th Street, Basement, 
+	122 East 37th Street, Basement, 
 						<br />(Betw Park & Lexington Avenues) NY 10016
 						<br />
 						<br />
@@ -1061,7 +1061,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>BREAKFAST CLUB - Breakfast Club</b><br />
-						30 East 35th Street, 
+	30 East 35th Street, 
 						<br />(Betw Madison & Park Avenues) NY 10016
 						<br />
 						<br />
@@ -1106,7 +1106,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Cathedral High School</h4><br />
 				  	    <b>CARLYLE - Carlyle</b><br />
-						350 East 56th Street, 
+	350 East 56th Street, 
 						<br />(Betw 1st  & 2nd Avenues) NY 10022
 						<br />
 						<br />
@@ -1139,7 +1139,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Peter's Lutheran Church @ Citicorp Center</h4><br />
 				  	    <b>CITY GROUP - Citikorp</b><br />
-						619 Lexington Avenue, Lower Level Music Rooms, 
+	619 Lexington Avenue, Lower Level Music Rooms, 
 						<br />(Enter on 54th Street, Betw. Lexington & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -1220,7 +1220,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>COURAGE TO CHANGE - Courage To Change</b><br />
-						122 East 37th Street, Basement, 
+	122 East 37th Street, Basement, 
 						<br />(Betw. Park & Lexington Avenues ) NY 10016
 						<br />
 						<br />
@@ -1289,7 +1289,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">J.H. Holmes Community House</h4><br />
 				  	    <b>EMPIRE STATE - Empire State</b><br />
-						28 East 35th Street, 
+	28 East 35th Street, 
 						<br />upstairs, through red door, 1st room on right NY 10016
 						<br />
 						<br />
@@ -1326,7 +1326,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Cathedral High School </h4><br />
 				  	    <b>GOTHAM - Gotham</b><br />
-						350 East 56th Street , 
+	350 East 56th Street , 
 						<br />56th Street & First Avenue, 3rd Floor Library NY 10022
 						<br />
 						<br />
@@ -1363,7 +1363,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Soldiers, Sailors, Marines & Airmen's Club</h4><br />
 				  	    <b>GRAND CENTRAL - Grand Central</b><br />
-						283 Lexington Avenue, 2nd Floor, 
+	283 Lexington Avenue, 2nd Floor, 
 						<br />(Betw 36th & 37th Streets) NY 10016
 						<br />
 						<br />
@@ -1408,7 +1408,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>GRUPO BRASIL - </b><br />
-						122 East 37th Street, Basement, 
+	122 East 37th Street, Basement, 
 						<br />(Betw. Park & Lexington Avenues) 10016
 						<br />
 						<br />
@@ -1441,7 +1441,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Peter's Lutheran Church @ CitiCorp Center</h4><br />
 				  	    <b>LIFE LINE - Life Line</b><br />
-						619 Lexington Avenue, Lower Level 2 in The Studio, 
+	619 Lexington Avenue, Lower Level 2 in The Studio, 
 						<br />(Enter on 54th Street, Betw. Lexington & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -1478,7 +1478,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Saint Agnes Church</h4><br />
 				  	    <b>LUNCH BUNCH - Lunch Bunch</b><br />
-						141 East 43rd Street, Basement Hall, elevator is available., 
+	141 East 43rd Street, Basement Hall, elevator is available., 
 						<br />(Betw. Lexington & 3rd Avenues) NY 10017
 						<br />
 						<br />
@@ -1527,7 +1527,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">MUSTARD SEED</h4><br />
 				  	    <b>LUNCHTIME EXPRESS AT THE MUSTARD SEED - </b><br />
-						122 E 37TH St., 
+	122 E 37TH St., 
 						<br />Btw. Park and Lexington 10016
 						<br />
 						<br />
@@ -1552,7 +1552,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Mustard Seed</h4><br />
 				  	    <b>MEDITATION SATURDAY NIGHT - Meditation Saturday Night</b><br />
-						122 East 37th Street, 
+	122 East 37th Street, 
 						<br />(Betw. Park & Lexington Avenues) NY 10016
 						<br />
 						<br />
@@ -1581,7 +1581,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Agnes Church</h4><br />
 				  	    <b>MONDAY MEN - Monday Men</b><br />
-						141 East 43rd Street, 
+	141 East 43rd Street, 
 						<br />(Betw. Lexington & 3rd Avenues) NY 10017
 						<br />
 						<br />
@@ -1614,7 +1614,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Church of the Incarnation</h4><br />
 				  	    <b>MURRAY HILL - Murray Hill</b><br />
-						209 Madison Avenue, 2nd Floor, 
+	209 Madison Avenue, 2nd Floor, 
 						<br />(Enter through side door @ 35th Street NY 10016
 						<br />
 						<br />
@@ -1643,7 +1643,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>MUSTARD SEED - Mustard Seed     (:I)</b><br />
-						122 East 37th Street,  Basement, 
+	122 East 37th Street,  Basement, 
 						<br />(Betw Park & Lexington Avenues) NY 10016
 						<br />
 						<br />
@@ -1912,7 +1912,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Peter's Lutheran Church @ CitiCorp Center</h4><br />
 				  	    <b>REBELLION DOGS - </b><br />
-						619 Lexington Avenue, Lower Level, 
+	619 Lexington Avenue, Lower Level, 
 						<br />(Enter on 54th Street, Betw. Lexington & 3rd Avenues) 10022
 						<br />
 						<br />
@@ -1945,7 +1945,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Church of the Good Shepherd</h4><br />
 				  	    <b>SATURDAY EAST - Saturday East</b><br />
-						240 East 31st Street, 
+	240 East 31st Street, 
 						NY 10016
 						<br />
 						<br />
@@ -1978,7 +1978,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">The New York New Church</h4><br />
 				  	    <b>SATURDAY STEP - Saturday Step</b><br />
-						114 East 35th Street, 2nd Floor, 
+	114 East 35th Street, 2nd Floor, 
 						<br />(Betw. Park & Lexington Avenues) NY 10016
 						<br />
 						<br />
@@ -2007,7 +2007,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">ALL SAINTS CHURCH</h4><br />
 				  	    <b>SERENITY EAST - Serenity East</b><br />
-						230 East 60th Street (Basement) , 
+	230 East 60th Street (Basement) , 
 						<br />(Betw 2nd & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -2044,7 +2044,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Caron Foundation</h4><br />
 				  	    <b>SERENITY EAST (:I) - </b><br />
-						244 East 58th Street, 
+	244 East 58th Street, 
 						<br />(Between 2nd and 3rd Avenues) 10022
 						<br />
 						<br />
@@ -2073,7 +2073,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Peter's Lutheran Church @ CitiCorp Center</h4><br />
 				  	    <b>SILKWORTH WOMEN'S - Silkworth Women's</b><br />
-						619 Lexington Avenue, Lower Level, 
+	619 Lexington Avenue, Lower Level, 
 						<br />(Enter on 54th Street, Betw. Lexington & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -2106,7 +2106,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">St. Bartholomew's Church</h4><br />
 				  	    <b>ST. BART'S TWELVE-THIRTIES - St. Bart's Twelve-Thirties</b><br />
-						325 Park Avenue, 
+	325 Park Avenue, 
 						<br />(Betw. East 50th & 51st Streets) NY 10022
 						<br />
 						<br />
@@ -2143,7 +2143,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">CHURCH OF THE GOOD SHEPARD</h4><br />
 				  	    <b>STRAIGHT 12 - </b><br />
-						236 EAST 31st STREET ,basement, 
+	236 EAST 31st STREET ,basement, 
 						<br />BETWEEN 2nd and 3rd AVENUES 10016
 						<br />
 						<br />
@@ -2176,7 +2176,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Conservative Synagogue</h4><br />
 				  	    <b>TEMPLETON - Templeton</b><br />
-						308 East 55th Street, 
+	308 East 55th Street, 
 						<br />(Betw 1st & 2nd Avenues) NY 10022
 						<br />
 						<br />
@@ -2201,7 +2201,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">The Caron Foundation</h4><br />
 				  	    <b>TRAFALGAR - Trafalgar</b><br />
-						244 East 58th Street, 
+	244 East 58th Street, 
 						<br />(Betw. 2nd & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -2230,7 +2230,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;">Caron Foundation</h4><br />
 				  	    <b>TUDOR - Tudor</b><br />
-						244 East 58th Street, Lower Level, 
+	244 East 58th Street, Lower Level, 
 						<br />(Betw. 2nd & 3rd Avenues) NY 10022
 						<br />
 						<br />
@@ -2259,7 +2259,7 @@ table thead th {
                     <td style="border-bottom:1px solid #e3e3e3; width:260px" valign="top">
                     	<h4 style="margin:0;padding:0;"></h4><br />
 				  	    <b>WOMEN'S ELEVENTH STEP - Women's Eleventh Step</b><br />
-						109 East 50th Street, 
+	109 East 50th Street, 
 						<br />(Between Park & Lexington) NY 10022
 						<br />
 						<br />
