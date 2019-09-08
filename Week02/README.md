@@ -37,8 +37,8 @@ c. The command _text(this).find('span').remove().html()_ refers to finding 'span
 
 Most of the commands I used were similar to the first Attempt except the ones mentioned below.
 
-2. Use [fs.readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) function to get string data from the text file Text05. <br/>
-5. Created a variable to contain string of the addresses <br/>
+1. Use [fs.readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) function to get string data from the text file Text05. <br/>
+2. Created a variable to contain string of the addresses <br/>
 
 ###  Issues and Errors
 
