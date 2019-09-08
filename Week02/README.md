@@ -44,4 +44,6 @@ Most of the commands I used were similar to the first Attempt except the ones me
 
 1. I had tried multiple commands for targeting and removing unnecessary information from the string/array, but it didn't workout. </br>
 2. I also tried to add line breaks after comma (,) and hyphen (-) by using split, but it also had several errors. 
+3. Also, I tried really hard to align the text in this file. :(
+
 
