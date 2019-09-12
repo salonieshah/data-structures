@@ -26,6 +26,7 @@ const fs = require('fs');
         text(this).find('span').remove().html();
         text(this).find('div').remove().html();
         text(this).find('detailsBox').remove().html();
+        text(this).find('h4').remove().html();
         
     console.log(text(elem).children().first().text().trim());
     });
