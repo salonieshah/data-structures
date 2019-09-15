@@ -1,9 +1,9 @@
 ## Data Structure
 # Week 02
 ---------------------------------------------------
-Assignment Date: 11th September 2019<br/>
-Assignment Due: 16th September 2019 <br/>
-Assignment Details can be found [here](https://github.com/visualizedata/data-structures/blob/master/weekly_assignment_03.md) <br/>
+#### Assignment Date: 11th September 2019<br/>
+#### Assignment Due: 16th September 2019 <br/>
+#### Assignment Details can be found [here](https://github.com/visualizedata/data-structures/blob/master/weekly_assignment_03.md) <br/>
 --------------------------------------------------
 1. Create four dependencies request, async, file server(fs) and dotenv. <br/>
 
@@ -23,6 +23,6 @@ Assignment Details can be found [here](https://github.com/visualizedata/data-str
 
 -------------------------------------------------
 
-### Issues and Errors
+##### Issues and Errors
 
 1. I had to redo the file extracting addresses in order to parse the exact addresses. However, I could not parse the zipcodes for any files. 
