@@ -1,5 +1,5 @@
 ## Data Structure
-# Week 02
+# Week 03
 ---------------------------------------------------
 #### Assignment Date: 11th September 2019<br/>
 #### Assignment Due: 16th September 2019 <br/>
