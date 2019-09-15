@@ -7,6 +7,13 @@
 --------------------------------------------------
 1. Create four dependencies request, async, file server(fs) and dotenv. <br/>
 
+```
+var request = require('request'); 
+var async = require('async'); 
+var fs = require('fs');
+const dotenv = require('dotenv');
+```
+
 2. Get the Api key for TAMU GeoServices.
 
 3. Read the JSON file and parse its contents into the current file.
