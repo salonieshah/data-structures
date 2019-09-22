@@ -25,7 +25,7 @@ content = JSON.parse(content);
 // 5. Created an empty array 
 var meetingsData = [];
 
-// 6. .eachSeries in the async module iterates over an array and operates on each item in the array in series
+// 6. Use .eachSeries in the async module to iterate over an array and operate on each item in the array in series
 async.eachSeries(content, function(value, callback) {
     var address = value.streetAddress;
     var apiRequest = 'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?';
@@ -34,7 +34,7 @@ async.eachSeries(content, function(value, callback) {
         apiRequest += '&format=json&version=4.01';
         // console.log(apiRequest);
 
-// 7. Requesting the contents of the body of the link by using the request.   
+// 7. Requesting the contents in the body of the link by using the request.   
     request(apiRequest, function(err, resp, body) {
         if (err) {throw err;}
         else {
@@ -49,14 +49,14 @@ async.eachSeries(content, function(value, callback) {
             }
             // console.log(geolocation);
             
-// 7. Pushing the object in the empty array that we created at the begining of the file           
+// 9. Pushing the object in the empty array that we created at the begining of the file           
             meetingsData.push(geolocation);
         }
     });
     
     setTimeout(callback, 2000);
     
-// 8. Write a .json file containing the values of the array.     
+// 10. Write a .json file containing the values of the array.     
     }, function() {
         fs.writeFileSync('Geo_Address.json', JSON.stringify(meetingsData));
         console.log('*** *** *** *** ***');
