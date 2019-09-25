@@ -3,7 +3,7 @@
 // Date: 21 September 2019
 
 //Lets Get Started
-// 1. Create for dependencies i.e. pg and dotenv
+// 1. Create two dependencies i.e. pg and dotenv
 const { Client } = require('pg'); // npm install pg
 const dotenv = require('dotenv'); // npm install dotenv
 dotenv.config();

@@ -25,6 +25,8 @@ addressesForDb = JSON.parse(addressesForDb);
 async.eachSeries(addressesForDb, function(value, callback) {
     const client = new Client(db_credentials);
     client.connect();
+    let n = 0;
+    
     var thisQuery = "INSERT INTO locations VALUES (E'" + value.streetaddress.StreetAddress + "','" + value.streetaddress.City + "', '" + value.streetaddress.State + "'," + value.latitude + ", " + value.longitude + ");";
     client.query(thisQuery, (err, res) => {
         console.log(err, res);

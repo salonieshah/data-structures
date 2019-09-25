@@ -3,11 +3,12 @@
 // Date: 21 September 2019
 
 //Lets Get Started
-// 1. Create for dependencies i.e. pg and dotenv
+// 1. Create three dependencies i.e. pg, fs and dotenv
 const { Client } = require('pg');
+var fs = require('fs');
 const dotenv = require('dotenv'); 
 dotenv.config();
-var fs = require('fs');
+
 
 
 //2. AWS RDS POSTGRESQL INSTANCE
@@ -27,11 +28,11 @@ var thisQuery = "SELECT * FROM locations;";
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res.rows);
+    fs.writeFileSync('Table_1.json', JSON.stringify(res.rows));
     client.end();
 });
 
-// var table1 = {};
-// table1.push(res.rows);
+
 // function() {
-//         fs.writeFileSync('Table_1.json', JSON.stringify(table1));
+//         fs.writeFileSync('Table_1.json', JSON.stringify(res.rows));
 //     };
