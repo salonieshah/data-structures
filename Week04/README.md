@@ -13,7 +13,7 @@ D. Load the table with available information<br/>
 E. Query the contents for the table<br/>
 
 #### A. Schematic Model
-![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week04/Data%20Structure.png)
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week04/Data%20Structure.png)<br/>
 After analysing available information on the current webpage. I decided to structure the contents into 3 different table which can extract information from each other as needed. <br/>
 1. Location table contains the information regarding the locations of different meetings.<br/>
 2. Meeting Details table containing all the meeting information.<br/>
