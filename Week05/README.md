@@ -21,8 +21,9 @@ Datatype of Sort Key: `String`<br/>
 
 #### B. Design a Data Model <br/> 
 I used denormalised data model and designed a single table that includes an idea for the things I wanted to document in my personal blog. (ps: this is everything my mom asks me everyday) <br/>
+<br/>
 ![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week05/NOSQL_Datamodel_Processblog.PNG) <br/> 
-
+<br/>
 #### C. Create Database for the Table<br/>
 1. Create an empty array to push blog entry items<br/> 
 ```
