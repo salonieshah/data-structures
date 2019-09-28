@@ -85,6 +85,36 @@ blogEntries.push(new BlogEntry
                     )
                 ); 
 ```
+#### D. Populate the Database<br/>
+1. Create dependencies and configure.<br/> 
+```
+var AWS = require('aws-sdk');
+AWS.config = new AWS.Config();
+AWS.config.region = "us-east-1";
+var async = require('async');
+```
+2. Connect to dynamodb to create a noSQL database <br/> 
+```
+var dynamodb = new AWS.DynamoDB();
+```
+3. Create a for loop to push all the items in the array
+```var params = {};
+var i = 0 ;
+    for (i=0; i < blogEntries.length; i++){
+        params.Item += blogEntries[i];  
+        }
+params.TableName = "processblog";
+```
 
+4. Use .eachSeries from async library to console log errors and set timeout
+```async.eachSeries(blogEntries, function(value, callback) {
+    params.Item = value;
+    dynamodb.putItem(params, function (err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else console.log(data); // successful response
+    });   
+setTimeout(callback, 2000);
+});
+''' 
   
 
