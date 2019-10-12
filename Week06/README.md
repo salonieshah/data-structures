@@ -26,6 +26,14 @@ var thisQuery = `SELECT * FROM locations WHERE address = '619 LEXINGTON AVE New 
 
 The primary key for database was Category, while  the sort key was date. I choose to query for all the entries with category 'New York' category between 'August 1 2019' and 'September 1 2019'<br/>
 ```
-
+var params = {
+    TableName : "processblog",
+     KeyConditionExpression: "category = :categoryName and created between :minDate and :maxDate", // the query expression
+    ExpressionAttributeValues: { // the query values
+        ":categoryName": {S: "New York"},
+        ":minDate": {S: new Date("August 1, 2019").toLocaleString()},
+        ":maxDate": {S: new Date("September 1, 2019").toLocaleString()},
+    }
+};
 ```
 ![Console](https://github.com/salonieshah/data-structures/blob/master/Week06/Images/Query%20for%20personal%20blog%20data%20in%20DynamoDB.JPG)<br/>
