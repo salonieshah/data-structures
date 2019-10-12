@@ -21,8 +21,8 @@ class BlogEntry {
     constructor(category, date, content, mood, food, activity, gratefulFor) {
         this.category = {}; //Category Partition Key
         this.category.S = category;
-        this.date = {}; //Time Created Sort Key
-        this.date.S = new Date(date).toDateString();
+        this.created = {}; //Time Created Sort Key
+        this.created.S = new Date(date).toLocaleString();
         this.content = {}; // What's on your mind?
         this.content.S = content;
         this.mood = {}; // How are you feeling?
@@ -39,7 +39,7 @@ class BlogEntry {
 // 5. Push items in the empty array
 blogEntries.push(new BlogEntry
                     ('India', //based on locations
-                    '3 August 2019 00:30', // Is equivalent to 3 Aug 2019 at 00:30 EDT (07:00pm UTC)
+                    'August 3, 2019 00:30', // Is equivalent to 3 Aug 2019 at 00:30 EDT (07:00pm UTC)
                     "Taking an international flight. I would miss my family and friends. I hope it's worth it.", 
                     'Sad', 
                     'Indian food', 
@@ -51,7 +51,7 @@ blogEntries.push(new BlogEntry
 
 blogEntries.push(new BlogEntry
                     ('New York', //based on locations
-                    '4 August 2019 19:00', // Is equivalent to 4 Aug 2019 at 19:00 EDT (11:00pm UTC)
+                    'August 4, 2019 19:00', // Is equivalent to 4 Aug 2019 at 19:00 EDT (11:00pm UTC)
                     "It's my first day outside India, in the first sight America looks beautiful.", 
                     'Excited', 
                     'Indian food', 
@@ -62,7 +62,7 @@ blogEntries.push(new BlogEntry
                 
 blogEntries.push(new BlogEntry
                     ('New York', //based on locations
-                    '6 August 2019 20:00', // Is equivalent to 4 Aug 2019 at 19:00 EDT (11:00pm UTC)
+                    'August 6, 2019 20:00', // Is equivalent to 4 Aug 2019 at 19:00 EDT (11:00pm UTC)
                     "I went to my school. It looks like a five star hotel. New York is beautiful", 
                     'Happy', 
                     'Chipotle', 
