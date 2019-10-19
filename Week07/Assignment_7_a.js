@@ -102,8 +102,21 @@ var fileNumber = [
             });
                 aaData.push(allDetails);
                 console.log(aaData);
-//7. Create a json
-                fs.writeFileSync('aaData.json', JSON.stringify(aaData));
+                
+//7. Removing empty files
+var contentDefined = [];
+aaData.forEach(aaDataObject => {
+    // console.log(contentObject.locationDetails.streetAddress);
+    if(aaDataObject.locationDetails != undefined) {
+    //   console.log(contentObject.locationDetails.streetAddress); 
+      contentDefined.push(aaDataObject);
+    }
+});
+
+
+
+//8. Create a json
+                fs.writeFileSync('aaData.json', JSON.stringify(contentDefined));
             });
     });
      
