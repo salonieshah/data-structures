@@ -15,17 +15,32 @@ const apiKey = process.env.TAMU_Key;
 
 
 // 3. Read the JSON file and parse the contents of the file.
-var content = fs.readFileSync('aa.json');
+var content = fs.readFileSync('aaData.json');
 content = JSON.parse(content);
-console.log(content);
-console.log(content.length);
+// console.log(content);
+// console.log(content.length);
+
+
+var contentDefined = [];
+content.forEach(contentObject => {
+    // console.log(contentObject.locationDetails.streetAddress);
+    if(contentObject.locationDetails != undefined) {
+    //   console.log(contentObject.locationDetails.streetAddress); 
+      contentDefined.push(contentObject);
+    }
+});
+
+// console.log('***')
+// console.log(contentDefined.length);
+// console.log(contentDefined);
 
 // 5. Created an empty array 
 var meetingsData = [];
 
 // 6. Use .eachSeries in the async module to iterate over an array and operate on each item in the array in series
-async.eachSeries(content, function(value, callback) {
+async.eachSeries(contentDefined, function(value, callback) {
     var address = value.locationDetails.streetAddress;
+    // console.log(address);
     var apiRequest = 'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?';
     apiRequest += 'streetAddress=' + address.split(' ').join('%20');
     apiRequest += '&city=New%20York&state=NY&apikey=' + apiKey;
@@ -45,9 +60,11 @@ async.eachSeries(content, function(value, callback) {
             geoLocation.address = tamuGeo['InputAddress'];
             geoLocation.latitude = tamuGeo['OutputGeocodes'][0]['OutputGeocode']['Latitude'];
             geoLocation.longitude = tamuGeo['OutputGeocodes'][0]['OutputGeocode']['Longitude'];
+            
+            value.geoLocation = geoLocation;
 
 // 9. Pushing the object in the empty array that we created at the begining of the file          
-            meetingsData.push(geoLocation);
+            meetingsData.push(value);
         }
     
     });
@@ -58,4 +75,5 @@ async.eachSeries(content, function(value, callback) {
 }, function() {
     fs.writeFileSync('Assignment_7_b.json', JSON.stringify(meetingsData));
     console.log(meetingsData.length);
+    console.log('*******************');
 });
