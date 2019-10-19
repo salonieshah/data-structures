@@ -1,6 +1,7 @@
 // Saloni Shah
 // Data Structure: Assignment 07 
 // Date: 18 October 2019
+//Acknowledgements : Marisa Asari, Neil Oliver
 
 //Lets Get Started
 // 1. Create for dependencies i.e. request, async, fs, dotenv
@@ -20,7 +21,7 @@ content = JSON.parse(content);
 // console.log(content);
 // console.log(content.length);
 
-
+//4. Remove empty objects from Array
 var contentDefined = [];
 content.forEach(contentObject => {
     // console.log(contentObject.locationDetails.streetAddress);
