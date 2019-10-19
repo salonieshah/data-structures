@@ -3,14 +3,14 @@
 // Date: 05 October 2019
 
 //Lets Get Started
-// 1. Create two dependencies i.e. pg and dotenv
+//1. Create two dependencies i.e. pg and dotenv
     var fs = require('fs');
     var cheerio = require('cheerio');
     
 //2. Create an empty array
     var aaData =[];
     
-// 3. Load the meetings text file into a variable content    
+//3. Load the meetings text file into a variable content    
 var filePath = 'data/';
 var fileNumber = [
     'm01',  
@@ -28,17 +28,17 @@ var fileNumber = [
     
     fileNumber.forEach(file => {
 
-// 4. Load the meetings text file into a variable content
+//4. Load the meetings text file into a variable content
      var content = fs.readFileSync('data/' + file + '.txt');
     //console.log(content);
           
-// 5.Load `content` into cheerio object
+//5. Load `content` into cheerio object
     var $ = cheerio.load(content);
     
 
 
 
-// 5. Find the elements of a particular style which belongs to the item and push it into array. 
+//6. Find the elements of a particular style which belongs to the item and push it into array. 
         $('tr').each(function(j, trElem) {
             //let id = j;
             var allDetails = {};
@@ -116,7 +116,7 @@ aaData.forEach(aaDataObject => {
 
 
 //8. Create a json
-                fs.writeFileSync('aaData.json', JSON.stringify(contentDefined));
+                fs.writeFileSync('Assignment_7_a.json', JSON.stringify(contentDefined));
             });
     });
      
