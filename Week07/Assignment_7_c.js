@@ -23,9 +23,9 @@ client.connect();
 
 // 4. SQL statement to create a table: 
 var thisQuery = [];
-thisQuery +="CREATE TABLE aaData (Location_Id serial primary key, Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
+// thisQuery +="CREATE TABLE aaData (Location_Id serial primary key, Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
 
-// thisQuery +="CREATE TABLE aaData (Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
+thisQuery +="CREATE TABLE aaData (Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
 
 //thisQuery +="CREATE TABLE locationDetails (Location_Id serial primary key, Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean);";
 //thisQuery +="CREATE TABLE meetingDetails (Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";

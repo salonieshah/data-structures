@@ -74,7 +74,7 @@ async.eachSeries(contentDefined, function(value, callback) {
     
 // 10. Write a .json file containing the values of the array.  
 }, function() {
-    fs.writeFileSync('Assignment_7_b.json', JSON.stringify(meetingsData));
+    fs.writeFileSync('JSON/Assignment_7_b.json', JSON.stringify(meetingsData));
     console.log(meetingsData.length);
     console.log('*******************');
 });

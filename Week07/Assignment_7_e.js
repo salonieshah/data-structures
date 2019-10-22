@@ -24,15 +24,12 @@ const client = new Client(db_credentials);
 client.connect();
 
 //4. Sample SQL statement to query the entire contents of a table: 
-var thisQuery = "SELECT * FROM aaData;";
+// var thisQuery = "SELECT * FROM aaData;";
+var thisQuery = "SELECT latitude, longitude FROM aaData;";
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res.rows);
-    fs.writeFileSync('Assignment_7_e.json', JSON.stringify(res.rows));
+    // fs.writeFileSync('JSON/Assignment_7_e.json', JSON.stringify(res.rows)); //all aaData
+    fs.writeFileSync('JSON/Assignment_7_f.json', JSON.stringify(res.rows)); //latitude and longitude
     client.end();
 });
-
-
-// function() {
-//         fs.writeFileSync('Table_1.json', JSON.stringify(res.rows));
-//     };

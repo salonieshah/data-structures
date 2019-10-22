@@ -116,7 +116,7 @@ aaData.forEach(aaDataObject => {
 
 
 //8. Create a json
-                fs.writeFileSync('Assignment_7_a.json', JSON.stringify(contentDefined));
+                fs.writeFileSync('JSON/Assignment_7_a.json', JSON.stringify(contentDefined));
             });
     });
      

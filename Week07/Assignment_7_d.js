@@ -18,25 +18,30 @@ db_credentials.database = 'aa';
 db_credentials.password = process.env.AWSRDS_PW;
 db_credentials.port = 5432;
 
+//3. Create a variable to read the json file.
 var addressesForDb = fs.readFileSync("Assignment_7_b.json");
 addressesForDb = JSON.parse(addressesForDb);
+// console.log(addressesForDb.length);
 
-// 3. Connect to the AWS RDS Postgres database and insert values
-async.eachSeries(addressesForDb, function(value, callback) {
-    async.eachSeries(addressesForDb.meetingDetail, function(value, callback) {
-    const client = new Client(db_credentials);
-    client.connect();
-    let n = 0;
-    console.log(value.addressesForDb);
-    var thisQuery = "INSERT INTO aaData VALUES (E'" + addressesForDb.id + "','" + value.locationDetails.zone + "','" + value.locationDetails.streetAddress + "','" + value.locationDetails.city + "','" + value.locationDetails.state + "','" + value.locationDetails.zipcode + "','" + value.geoLocation.latitude + "','" + value.geoLocation.longitude + "','" + value.accessibility + "','" + value.meetingName.meetingName + "','" + value.meetingDetail.day + "','" + value.meetingDetail.startTime +"','" + value.meetingDetail.endTime +"','" + value.meetingDetail.time +"','" + value.meetingDetail.type +"');";
-//   var thisQuery = "INSERT INTO aaData VALUES (E'" + meeting.id + "','" + value.locationDetails.zone + "','" + value.locationDetails.streetAddress + "','" + value.locationDetails.city + "','" + value.locationDetails.state + "','" + value.locationDetails.zipcode + "','" + value.geoLocation.latitude + "','" + value.geoLocation.longitude + "','" + value.accessibility + "','" + value.meetingName.meetingName + "','" + value.meetingDetail.day + "','" + value.meetingDetail.startTime +"','" + value.meetingDetail.endTime +"','" + value.meetingDetail.time +"','" + value.meetingDetail.type +"');";
+//4. Connect to the AWS RDS Postgres database and insert values by creating async function inside an async function.
+async.eachSeries(addressesForDb, function(value1, callback1) {
+    async.eachSeries(value1.meetingDetail, function(value2, callback2) {
+    console.log(value1);
+    console.log(value2);
     
-    // var thisQuery = "INSERT INTO aaData VALUES (E'" + '1' + "','" +value.locationDetails.streetAddress + "','" + value.streetaddress.City + "', '" + value.streetaddress.State + "'," + value.latitude + ", " + value.longitude + ");";
-    client.query(thisQuery, (err, res) => {
-        console.log(err, res);
-        client.end();
+    // const client = new Client(db_credentials);
+    // client.connect();
+    
+    var thisQuery = "INSERT INTO aaData VALUES ('" + value1.locationDetails.zone + "','" + value1.locationDetails.streetAddress + "','" + value1.locationDetails.city + "','" + value1.locationDetails.state + "','" + value1.locationDetails.zipcode + "','" + value1.geoLocation.latitude + "','" + value1.geoLocation.longitude + "','" + value1.accessibility + "','" + value1.meetingName.meetingName + "','" + value2.day + "','" + value2.startTime +"','" + value2.endTime +"','" + value2.time +"','" + value2.type +"');";
+    // console.log(thisQuery);
+    
+    // client.query(thisQuery, (err, res) => {
+    //     console.log(err, res);
+    //     client.end();
+    // });
+   
+     
+    setTimeout(callback2, 1000); 
     });
-    setTimeout(callback, 2000); 
-
-    })
+    setTimeout(callback1, 1000);
     }); 
