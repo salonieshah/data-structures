@@ -10,6 +10,12 @@ A. Parse and clean all relevant data for all the zones <br/>
 B. Geocode all the locations for all the zones <br/>
 C. Create a table with PostgreSQL and query the contents <br/>
 
+#### Intent </br>
+The intent was to create one table that contains all the information of each meeting, addreess, accessibility and zone as per my scematic model discussed in Assignment 4.<br/>
+![Data Structure_1](https://github.com/salonieshah/data-structures/blob/master/Week04/Data%20Structure_Backhand%20Process.png) <br/> 
+
+
+
 #### A. Parse and clean all relevant data for all the zones <br/>
 
 1. Create two dependencies i.e. pg and dotenv<br/>
@@ -100,7 +106,9 @@ aaData.forEach(aaDataObject => {
 ```
 8. Creating a JSON
 Hence I ended up creating one json file containing an array, which contains multiple objects for each row (address). Hence I have an object containing location details(object), accessibility(object), meeting name(object) and meeting details.(objects within array) <br/>
+The objects are divided into objects as discussed in my scematic model in Assignment 4<br/>
 
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week04/Data%20Structure.png)<br/>
 ```
 [{"id":4,
 "locationDetails":{"zone":"01","streetAddress":"20 Cardinal Hayes Place","city":"New York","state":"NY","zipcode":"10007"},
