@@ -178,7 +178,7 @@ thisQuery +="CREATE TABLE aaData (Zone int, Street_Address varchar(100), City va
 <br/>
 
 ###### b. Add the data into the table <br/>
-/Lets Get Started
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_d.JPG) <br/>
 1. Create for dependencies i.e. pg, dotenv, async, fs <br/>
 2. AWS RDS POSTGRESQL INSTANCE <br/>
 3. Read the JSON and load it in a variable <br/>
@@ -210,8 +210,8 @@ client.query(thisQuery, (err, res) => {
     client.end();
 });
 ```
-
-
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_1.JPG) <br/>
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_2.JPG) <br/>
 
 
 
