@@ -173,12 +173,12 @@ request(apiRequest, function(err, resp, body) {
 3. SQL statement to create a table<br/>
 I am creating one table with all the details of location, geocodes, meeting name, meeting details and accessibility. <br/>
 ```var thisQuery = [];
-thisQuery +="CREATE TABLE aaData (Location_Id serial primary key, Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
+thisQuery +="CREATE TABLE aaData (Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
 ```
 <br/>
 
 ###### b. Add the data into the table <br/>
-/Lets Get Started
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_d.JPG) <br/>
 1. Create for dependencies i.e. pg, dotenv, async, fs <br/>
 2. AWS RDS POSTGRESQL INSTANCE <br/>
 3. Read the JSON and load it in a variable <br/>
@@ -186,13 +186,10 @@ thisQuery +="CREATE TABLE aaData (Location_Id serial primary key, Zone int, Stre
 5. Use async.each series to iterate over each item in an array.<br/>
 I have used async function within a async function as my meeting details are an array and it helps in iterate over each item to form content for the table <br/>
 ```
-async.eachSeries(addressesForDb, function(value, callback) {
-    async.eachSeries(addressesForDb.meetingDetail, function(value, callback) {
-    const client = new Client(db_credentials);
-    client.connect();
-    let n = 0;
-    console.log(value.addressesForDb);
-    var thisQuery = "INSERT INTO aaData VALUES (E'" + addressesForDb.id + "','" + value.locationDetails.zone + "','" + value.locationDetails.streetAddress + "','" + value.locationDetails.city + "','" + value.locationDetails.state + "','" + value.locationDetails.zipcode + "','" + value.geoLocation.latitude + "','" + value.geoLocation.longitude + "','" + value.accessibility + "','" + value.meetingName.meetingName + "','" + value.meetingDetail.day + "','" + value.meetingDetail.startTime +"','" + value.meetingDetail.endTime +"','" + value.meetingDetail.time +"','" + value.meetingDetail.type +"');";
+async.eachSeries(addressesForDb, function(value1, callback1) {
+    async.eachSeries(value1.meetingDetail, function(value2, callback2) {
+    var thisQuery = "INSERT INTO aaData VALUES ('" + value1.locationDetails.zone + "','" + value1.locationDetails.streetAddress + "','" + value1.locationDetails.city + "','" + value1.locationDetails.state + "','" + value1.locationDetails.zipcode + "','" + value1.geoLocation.latitude + "','" + value1.geoLocation.longitude + "','" + value1.accessibility + "','" + value1.meetingName.meetingName + "','" + value2.day + "','" + value2.startTime +"','" + value2.endTime +"','" + value2.time +"','" + value2.type +"');";
+    
 ```
 
 ###### c. Query the content of the table <br/>
@@ -203,16 +200,18 @@ async.eachSeries(addressesForDb, function(value, callback) {
 4. Sample SQL statement to query the entire contents of a table<br/>
 
 ```
-var thisQuery = "SELECT * FROM aaData;";
+// var thisQuery = "SELECT * FROM aaData;";
+var thisQuery = "SELECT latitude, longitude FROM aaData;";
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res.rows);
-    fs.writeFileSync('Assignment_7_e.json', JSON.stringify(res.rows));
+    // fs.writeFileSync('JSON/Assignment_7_e.json', JSON.stringify(res.rows)); //all aaData
+    fs.writeFileSync('JSON/Assignment_7_f.json', JSON.stringify(res.rows)); //latitude and longitude
     client.end();
 });
 ```
-
-
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_1.JPG) <br/>
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_2.JPG) <br/>
 
 
 
