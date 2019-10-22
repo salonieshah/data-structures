@@ -101,6 +101,14 @@ aaData.forEach(aaDataObject => {
 8. Creating a JSON
 Hence I ended up creating one json file containing an array, which contains multiple objects for each row (address). Hence I have an object containing location details(object), accessibility(object), meeting name(object) and meeting details.(objects within array) <br/>
 
+```
+[{"id":4,
+"locationDetails":{"zone":"01","streetAddress":"20 Cardinal Hayes Place","city":"New York","state":"NY","zipcode":"10007"},
+"accessibility":false,
+"meetingName":{"meetingName":"A DESIGN FOR LIVING"},
+"meetingDetail":[{"id":4,"day":"Thursdays","startTime":"7:00","endTime":"8:00","time":"AM","type":"OD"},
+                 {"id":4,"day":"Tuesdays","startTime":"7:00","endTime":"8:00","time":"AM","type":"B"}]}]
+```
 <br/>
 
 #### B. Geocode all the locations for all the zones <br/>
@@ -137,6 +145,17 @@ request(apiRequest, function(err, resp, body) {
 
 7. Pushing the object in the empty array that we created at the begining of the file<br/>          
 8. Write a .json file containing the values of the array.  <br/>
+```
+[{"id":4,
+"locationDetails":{"zone":"01","streetAddress":"20 Cardinal Hayes Place","city":"New York","state":"NY","zipcode":"10007"},
+"accessibility":false,
+"meetingName":{"meetingName":"A DESIGN FOR LIVING"},
+"meetingDetail":[{"id":4,"day":"Thursdays","startTime":"7:00","endTime":"8:00","time":"AM","type":"OD"},
+                 {"id":4,"day":"Tuesdays","startTime":"7:00","endTime":"8:00","time":"AM","type":"B"}],
+"geoLocation":{"address":{"StreetAddress":"20 CARDINAL HAYES PL New York NY undef","City":"New York","State":"NY"},
+              "latitude":"40.7132514",
+              "longitude":"-74.002398"}},
+```
 <br/>
 #### C. Create a table with PostgreSQL and query the contents <br/>
 
