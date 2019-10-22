@@ -137,5 +137,74 @@ request(apiRequest, function(err, resp, body) {
 
 7. Pushing the object in the empty array that we created at the begining of the file<br/>          
 8. Write a .json file containing the values of the array.  <br/>
+<br/>
+#### C. Create a table with PostgreSQL and query the contents <br/>
+
+###### a. Create a Table<br/>
+1. Create two dependencies i.e. pg and dotenv<br/>
+2. Connect to the AWS RDS Postgres database<br/>
+3. SQL statement to create a table<br/>
+I am creating one table with all the details of location, geocodes, meeting name, meeting details and accessibility. <br/>
+```var thisQuery = [];
+thisQuery +="CREATE TABLE aaData (Location_Id serial primary key, Zone int, Street_Address varchar(100), City varchar(10), State varchar(5),  Zipcode varchar(5), Latitude double precision, Longitude double precision, Accessibity boolean, Meeting_Name varchar(50), Meeting_Day varchar(50), Meeting_Start_Time time,  Meeting_End_Time time, Meeting_Time varchar(5),  Meeting_Type varchar(5));";
+```
+<br/>
+
+###### b. Add the data into the table <br/>
+/Lets Get Started
+1. Create for dependencies i.e. pg, dotenv, async, fs <br/>
+2. AWS RDS POSTGRESQL INSTANCE <br/>
+3. Read the JSON and load it in a variable <br/>
+4. Connect to the AWS RDS Postgres database and insert values<br/>
+5. Use async.each series to iterate over each item in an array.<br/>
+I have used async function within a async function as my meeting details are an array and it helps in iterate over each item to form content for the table <br/>
+```
+async.eachSeries(addressesForDb, function(value, callback) {
+    async.eachSeries(addressesForDb.meetingDetail, function(value, callback) {
+    const client = new Client(db_credentials);
+    client.connect();
+    let n = 0;
+    console.log(value.addressesForDb);
+    var thisQuery = "INSERT INTO aaData VALUES (E'" + addressesForDb.id + "','" + value.locationDetails.zone + "','" + value.locationDetails.streetAddress + "','" + value.locationDetails.city + "','" + value.locationDetails.state + "','" + value.locationDetails.zipcode + "','" + value.geoLocation.latitude + "','" + value.geoLocation.longitude + "','" + value.accessibility + "','" + value.meetingName.meetingName + "','" + value.meetingDetail.day + "','" + value.meetingDetail.startTime +"','" + value.meetingDetail.endTime +"','" + value.meetingDetail.time +"','" + value.meetingDetail.type +"');";
+```
+
+###### c. Query the content of the table <br/>
+
+1. Create three dependencies i.e. pg, fs and dotenv <br/>
+2. AWS RDS POSTGRESQL INSTANCE <br/>
+3. Connect to the AWS RDS Postgres database<br<br/>
+4. Sample SQL statement to query the entire contents of a table<br/>
+
+```
+var thisQuery = "SELECT * FROM aaData;";
+
+client.query(thisQuery, (err, res) => {
+    console.log(err, res.rows);
+    fs.writeFileSync('Assignment_7_e.json', JSON.stringify(res.rows));
+    client.end();
+});
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
