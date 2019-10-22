@@ -12,16 +12,16 @@ C. Create a table with PostgreSQL and query the contents <br/>
 
 #### A. Parse and clean all relevant data for all the zones <br/>
 
-1. Create two dependencies i.e. pg and dotenv
+1. Create two dependencies i.e. pg and dotenv<br/>
     ```
     var fs = require('fs');
     var cheerio = require('cheerio');
     ```
     
-2. Create an empty array
+2. Create an empty array<br/>
     ``` var aaData =[]; ```
     
-3. Load the meetings text file into a variable content and create a loop that repeats the function for each file.    
+3. Load the meetings text file into a variable content and create a loop that repeats the function for each file.<br/>    
 ```
 var filePath = 'data/';
 var fileNumber = [
@@ -35,17 +35,15 @@ var fileNumber = [
     'm08',  
     'm09',  
     'm10'
-    ];
-    
-    
+    ]; 
     fileNumber.forEach(file => {
      var content = fs.readFileSync('data/' + file + '.txt');
       ```
           
-4. Load `content` into cheerio object
-    ```var $ = cheerio.load(content);```
+4. Load content into cheerio object<br/>
+    ```var $ = cheerio.load(content); ```
     
-5. Find the elements of a particular style which belongs to the item and push it into array. 
+5. Find the elements of a particular style which belongs to the item and push it into array. <br/>
 I targeted each table row and created a function that targets children using style as an attribute. I used if...else if statement to target all the elements of the addresses in one attempt and creating a common object containing all the meeting details, addresses and accessibility details.</br>
         ```$('tr').each(function(j, trElem) {
             //let id = j;
@@ -104,12 +102,12 @@ Similarly cleaning the meeting data and then parsing information by understandin
                 }
             });
                 aaData.push(allDetails);
-                ```
+               
                 
 7. Creating a function to removing empty files. 
 I targeted each table row in the html files, hence I got a lot of empty objects within my  array. Hence I created function to eliminate all the undefined objects. <br/>
 
-```
+
 var contentDefined = [];
 aaData.forEach(aaDataObject => {
     // console.log(contentObject.locationDetails.streetAddress);
@@ -118,7 +116,7 @@ aaData.forEach(aaDataObject => {
       contentDefined.push(aaDataObject);
     }
 });
-```
+
 <br/>
 #### B. Geocode all the locations for all the zones <br/>
 
