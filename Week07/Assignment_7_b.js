@@ -16,7 +16,7 @@ const apiKey = process.env.TAMU_Key;
 
 
 // 3. Read the JSON file and parse the contents of the file.
-var content = fs.readFileSync('Assignment_7_a.json');
+var content = fs.readFileSync('JSON/Assignment_7_a.json');
 content = JSON.parse(content);
 // console.log(content);
 // console.log(content.length);

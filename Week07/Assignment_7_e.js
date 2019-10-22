@@ -30,6 +30,6 @@ var thisQuery = "SELECT latitude, longitude FROM aaData;";
 client.query(thisQuery, (err, res) => {
     console.log(err, res.rows);
     // fs.writeFileSync('JSON/Assignment_7_e.json', JSON.stringify(res.rows)); //all aaData
-    fs.writeFileSync('JSON/Assignment_7_f.json', JSON.stringify(res.rows)); //latitude and longitude
+    fs.writeFileSync('JSON/Assignment_7_e_2.json', JSON.stringify(res.rows)); //latitude and longitude
     client.end();
 });
