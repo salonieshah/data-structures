@@ -2,7 +2,7 @@
 # Week 06
 ---------------------------------------------------
 #### Assignment Date: 2nd October 2019<br/>
-#### Assignment Due: 14st October 2019 <br/>
+#### Assignment Due: 14th October 2019 <br/>
 #### Assignment Details can be found [here](https://github.com/visualizedata/data-structures/tree/master/weekly_assignment_06) <br/>
 --------------------------------------------------
 The assignment was divided into 2 different sections.<br/>
