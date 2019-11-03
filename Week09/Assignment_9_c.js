@@ -3,16 +3,18 @@
 // Date: 1 November 2019
 
 //Lets Get Started
-// 1. Create for dependencies i.e. pg, cTable
+// 1. Create for dependencies i.e. pg, cTable, dotenv
 const { Client } = require('pg');
 const cTable = require('console.table');
+const dotenv = require('dotenv'); 
+dotenv.config();
 
 //2. AWS RDS POSTGRESQL INSTANCE
 var db_credentials = new Object();
 db_credentials.user = 'salonieshah';
 db_credentials.host = 'data-structures.c0wrpagx3mr8.us-east-1.rds.amazonaws.com';
 db_credentials.database = 'aa';
-db_credentials.password = process.env.AWSRDS_PW;
+db_credentials.password = '06101995';
 db_credentials.port = 5432;
 
 //3. Connect to the AWS RDS Postgres database

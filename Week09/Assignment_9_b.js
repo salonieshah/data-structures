@@ -3,9 +3,11 @@
 // Date: 1 November 2019
 
 //Lets Get Started
-// 1. Create for dependencies i.e. pg, request
+// 1. Create for dependencies i.e. pg, request, dotenv
 var request = require('request');
 const { Client } = require('pg');
+const dotenv = require('dotenv'); 
+dotenv.config();
 
 // 2. Creating Variables for accessing Photon Particle
 var device_id = process.env.PHOTON_ID;
@@ -19,7 +21,7 @@ var db_credentials = new Object();
 db_credentials.user = 'salonieshah';
 db_credentials.host = 'data-structures.c0wrpagx3mr8.us-east-1.rds.amazonaws.com';
 db_credentials.database = 'aa';
-db_credentials.password = process.env.AWSRDS_PW;
+db_credentials.password = '06101995';
 db_credentials.port = 5432;
 
 //4. Creating a function that documents the temperature data by requesting information from URL and storing it in a variable

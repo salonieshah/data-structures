@@ -24,7 +24,11 @@ client.connect();
 // 4. SQL statement to create a table: 
 var thisQuery = [];
 thisQuery +="CREATE TABLE tempsensor (temperature double precision, time timestamp DEFAULT current_timestamp);";
+// thisQuery +="CREATE TABLE tempsensor (temperature double precision, time timestamp AT TIME ZONE 'EST');";
 
+
+// Sample SQL statement to delete a table: 
+// var thisQuery = "DROP TABLE tempsensor;"; 
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res);
