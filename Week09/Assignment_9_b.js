@@ -14,8 +14,7 @@ var device_id = process.env.PHOTON_ID;
 var access_token = process.env.PHOTON_TOKEN;
 var particle_variable = 'tempsensor';
 //var device_url = 'https://api.particle.io/v1/devices/' + device_id + '/' + particle_variable + '?access_token=' + access_token;
-var device_url = 'https://api.particle.io/v1/devices/1e0042000d47373334323233/tempsensor?access_token=b3e319bd8505dbac17ec8467fff0129ddda5bba3';
-
+var device_url = process.env.PHOTON_URL
 //3. AWS RDS POSTGRESQL INSTANCE
 var db_credentials = new Object();
 db_credentials.user = 'salonieshah';
