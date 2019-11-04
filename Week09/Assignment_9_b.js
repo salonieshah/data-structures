@@ -20,7 +20,7 @@ var db_credentials = new Object();
 db_credentials.user = 'salonieshah';
 db_credentials.host = 'data-structures.c0wrpagx3mr8.us-east-1.rds.amazonaws.com';
 db_credentials.database = 'aa';
-db_credentials.password = '06101995';
+db_credentials.password = process.env.AWSRDS_PW;
 db_credentials.port = 5432;
 
 //4. Creating a function that documents the temperature data by requesting information from URL and storing it in a variable
