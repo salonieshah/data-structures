@@ -1,6 +1,6 @@
 // Saloni Shah
-// Data Structure: Assignment 09 
-// Date: 1 November 2019
+// Data Structure: Assignment 03 
+// Date: 21 September 2019
 
 //Lets Get Started
 // 1. Create two dependencies i.e. pg and dotenv
@@ -23,8 +23,12 @@ client.connect();
 
 // 4. SQL statement to create a table: 
 var thisQuery = [];
-thisQuery +="CREATE TABLE tempsensor (temperature double precision, time timestamp DEFAULT current_timestamp);";
-
+//thisQuery +="CREATE TABLE locations (locationid serial primary key, zone int, address varchar(100), city varchar(10), state varchar(5), latitude double precision, longitude double precision);";
+thisQuery +="CREATE TABLE locations (address varchar(100), city varchar(10), state varchar(5), latitude double precision, longitude double precision);";
+// thisQuery += "CREATE TABLE meetings (meetingid serial primary key, meetingname varchar(100), meetingstarttime varchar(10), meetingendtime varchar(10), meetingday varchar(10), meetingtype varchar(10));";
+// thisQuery += "CREATE TABLE misc (accessibity boolean, notes varchar(1000));";
+// Sample SQL statement to delete a table: 
+//var thisQuery = "DROP TABLE locations;"; 
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res);

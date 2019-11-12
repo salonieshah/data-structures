@@ -1,11 +1,13 @@
 // Saloni Shah
-// Data Structure: Assignment 09 
-// Date: 1 November 2019
+// Data Structure: Assignment 06 
+// Date: 09 October 2019
 
 //Lets Get Started
-// 1. Create for dependencies i.e. pg, cTable
+// 1. Create dependencies and configure
 const { Client } = require('pg');
 const cTable = require('console.table');
+const dotenv = require('dotenv');
+dotenv.config();
 
 //2. AWS RDS POSTGRESQL INSTANCE
 var db_credentials = new Object();
@@ -18,13 +20,17 @@ db_credentials.port = 5432;
 //3. Connect to the AWS RDS Postgres database
 const client = new Client(db_credentials);
 client.connect();
+// console.log(client);
 
-//4. Sample SQL statement to check the table 
-var thisQuery = "SELECT * FROM tempsensor;"; // print all values
+//4. Sample SQL statement to query meetings at 619 LEXINGTON AVE New York NY 
+var thisQuery = `SELECT * FROM locations WHERE address = '619 LEXINGTON AVE New York NY '`;
+//var thisQuery = "SELECT mtgday, mtgtime, mtglocation, mtgaddress, mtgtypes FROM aadata WHERE mtgday = 'Monday' and mtghour >= 7;";
 
 client.query(thisQuery, (err, res) => {
     if (err) {throw err}
     else {
-    console.table(res.rows);
+        console.log('query successful');
+        console.table(res.rows);
+        client.end();
     }
 });
