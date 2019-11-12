@@ -212,9 +212,7 @@ client.query(thisQuery, (err, res) => {
 ```
 ![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_1.JPG) <br/>
 ![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_e_2.JPG) <br/>
-
-
-
+![Database Model](https://github.com/salonieshah/data-structures/blob/master/Week07/images/Assignment_7_f.JPG) <br/>
 
 
 

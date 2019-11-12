@@ -40,3 +40,20 @@ async.eachSeries(addressesForDb, function(value, callback) {
 
     });
     }); 
+//3. Connect to the AWS RDS Postgres database
+const client = new Client(db_credentials);
+client.connect();
+
+//4. Sample SQL statement to query the entire contents of a table: 
+var thisQuery = "SELECT * FROM locations;";
+
+client.query(thisQuery, (err, res) => {
+    console.log(err, res.rows);
+    fs.writeFileSync('Table_1.json', JSON.stringify(res.rows));
+    client.end();
+});
+
+
+// function() {
+//         fs.writeFileSync('Table_1.json', JSON.stringify(res.rows));
+//     };

@@ -29,11 +29,13 @@ var meetingsData = [];
 async.eachSeries(content, function(value, callback) {
     var address = value.streetAddress;
     // console.log(address)
+
     var apiRequest = 'https://geoservices.tamu.edu/Services/Geocode/WebService/GeocoderWebServiceHttpNonParsed_V04_01.aspx?';
         apiRequest += 'streetAddress=' + address.split(' ').join('%20');
         apiRequest += '&city=New%20York&state=NY&apikey=' + apiKey;
         apiRequest += '&format=json&version=4.01';
         console.log(apiRequest);
+        // console.log(apiRequest);
 
 // 7. Requesting the contents in the body of the link by using the request.   
     request(apiRequest, function(err, resp, body) {
