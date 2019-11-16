@@ -1,36 +1,118 @@
-var express = require('express'),// npm install express
-app = express();
-var bodyParser = require('body-parser')
-var cors = require('cors')
-var { pool } = require('./config')
+// 1. Create dependencies and configure
+var express = require('express'), // npm install express
+    app = express();
+var dotenv = require('dotenv');
+    dotenv.config();
+    const { Client } = require('pg');
+    var fs = require('fs');
+    const async = require ("async");
 
-    
-    
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+// 2. AWS RDS POSTGRESQL INSTANCE
+var db_credentials = new Object();
+db_credentials.user = 'salonieshah';
+db_credentials.host = 'data-structures.c0wrpagx3mr8.us-east-1.rds.amazonaws.com';
+db_credentials.database = 'aa';
+db_credentials.password = process.env.AWSRDS_PW;
+db_credentials.port = 5432;    
 
-const getBooks = (request, response) => {
-  pool.query('SELECT * FROM aaData', (error, results) => {
-    if (error) {
-      throw error
+
+// 3. Credentials for Dynamodb 
+var AWS = require('aws-sdk');
+AWS.config = new AWS.Config();
+AWS.config.region = "us-east-1";
+
+//4. Connect to the AWS RDS Postgres database for getting aa and sensor data
+const client = new Client(db_credentials);
+client.connect();
+
+//5. Create homepage
+app.get('/', function(req, res) {
+   res.send(`<h1>Data Structures</h1>
+            <ul>
+            <li> <a href= /aadata> Aa Data </a></li>
+            <li> <a href= /processblog> Process Blog </a></li>
+            <li> <a href= /sensordata> Sensor Data </a></li>
+            </ul>`);
+});
+
+//6. Query aaData 
+var aadata = []
+
+app.get('/aadata', function(req, res) {
+    res.send(aadata);
+});
+
+// Sample SQL statement to query lat/long for meetings at the address 109 West 129th Street, New York, NY 10027:
+// var aadata_query1 = "SELECT street_address FROM aaData;";
+// var aadata_query1 = "SELECT DISTINCT street_address FROM aaData;";
+// var aadata_query1 = "SELECT * FROM aaData WHERE meeting_start_time  BETWEEN 07:00:00 AND 10:00:00;";
+// var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5';";
+// var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5' AND meeting_day = 'Saturdays' OR zone = '5' AND meeting_day = 'Sundays' ;";
+var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5' AND meeting_day = 'Saturdays' AND meeting_start_time = '06:00:00' ;";
+
+client.query(aadata_query1, (err, res) => {
+    if (err) {throw err}
+    else {
+        aadata.push(res.rows);
+        console.log(aadata);
+        // client.end();
     }
-    response.status(200).json(results.rows)
-  })
-}
+});
 
-// app.get('/', function(req, res) {
-//   res.send(`<h1>hello, world!</h1>`);
-// });
+//7. Query Sensor Data 
+var sensordata = [];
 
-// app.get('/sensor', function(req, res) {
-//     res.send('<h3>this is the page for my sensor data</h3>');    
-// });
+app.get('/sensordata', function(req, res) {
+    res.send(sensordata);
+});
 
-// // serve static files in /public
-// app.use(express.static('public'));
+// var sensordata_query1 = "SELECT * FROM tempsensor;"; // print all values
+// var sensordata_query1 = "SELECT COUNT (*) FROM tempsensor;"; // print the number of rows
+var sensordata_query1 = "SELECT temperature, COUNT (*) FROM tempsensor GROUP BY temperature;"; // print the number of rows for each sensorValue
 
-// // listen on port 8080
-// app.listen(8080, function() {
-//     console.log('Server listening...');
-// });
+
+    client.query(sensordata_query1, (err, res) => {
+        if (err) {throw err}
+        else {
+            console.table(res.rows);
+            sensordata.push(res.rows);
+        }
+         client.end();
+    });
+    
+
+app.get('/processblog', function(req, res) {
+
+//8. Query process blog by Connect to dynamodb
+var dynamodb = new AWS.DynamoDB();
+
+//9. Sample statement to blog entries from 'New York' category between 'August 1 2019' and 'September 1 2019' 
+var params = {
+    TableName : "processblog",
+     KeyConditionExpression: "category = :categoryName and created between :minDate and :maxDate", // the query expression
+    ExpressionAttributeValues: { // the query values
+        ":categoryName": {S: "New York"},
+        ":minDate": {S: new Date("August 1, 2019").toLocaleString()},
+        ":maxDate": {S: new Date("September 1, 2019").toLocaleString()},
+    }
+};
+
+
+dynamodb.query(params, function(err, data) {
+    if (err) {
+        console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+    } else {
+        console.log("Query succeeded.");
+        data.Items.forEach(function(item) {
+              res.send(data);
+
+        });
+    }
+});
+});
+
+//10. listen on port 8080
+app.listen(8080, function() {
+    console.log('Success');
+});
+ 
