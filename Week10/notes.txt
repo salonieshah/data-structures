@@ -1,7 +1,0 @@
-instance id: i-0c4dabae935ffb39d
-
-ip address: 54.242.210.254
-
-subnet id: subnet-382f0664
-
-http://54.242.210.254:8080
