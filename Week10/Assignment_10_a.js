@@ -49,6 +49,7 @@ app.get('/aadata', function(req, res) {
 // var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5';";
 // var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5' AND meeting_day = 'Saturdays' OR zone = '5' AND meeting_day = 'Sundays' ;";
 var aadata_query1 = "SELECT * FROM aaData WHERE zone = '5' AND meeting_day = 'Saturdays' AND meeting_start_time = '06:00:00' ;";
+// var aadata_query1 = "SELECT DISTINCT street_address FROM aaData;";
 
 client.query(aadata_query1, (err, res) => {
     if (err) {throw err}
@@ -88,10 +89,10 @@ var dynamodb = new AWS.DynamoDB();
 
 //9. Sample statement to blog entries from 'New York' category between 'August 1 2019' and 'September 1 2019' 
 var params = {
-    TableName : "processblog",
+    TableName : "blog",
      KeyConditionExpression: "category = :categoryName and created between :minDate and :maxDate", // the query expression
     ExpressionAttributeValues: { // the query values
-        ":categoryName": {S: "New York"},
+        ":categoryName": {S: "Concepts"},
         ":minDate": {S: new Date("August 1, 2019").toLocaleString()},
         ":maxDate": {S: new Date("September 1, 2019").toLocaleString()},
     }

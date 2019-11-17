@@ -24,8 +24,8 @@ const client = new Client(db_credentials);
 client.connect();
 
 //4. Sample SQL statement to query the entire contents of a table: 
-// var thisQuery = "SELECT * FROM aaData;";
-var thisQuery = "SELECT latitude, longitude FROM aaData;";
+var thisQuery = "SELECT * FROM aaData;";
+// var thisQuery = "SELECT latitude, longitude FROM aaData;";
 
 client.query(thisQuery, (err, res) => {
     console.log(err, res.rows);
