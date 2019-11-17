@@ -29,9 +29,9 @@ client.connect();
 app.get('/', function(req, res) {
    res.send(`<h1>Data Structures</h1>
             <ul>
-            <li> <a href= /aadata> Aa Data </a></li>
-            <li> <a href= /processblog> Process Blog </a></li>
-            <li> <a href= /sensordata> Sensor Data </a></li>
+            <li> <a href= /aadata> AA Meetings </a></li>
+            <li> <a href= /processblog> Green will Leave </a></li>
+            <li> <a href= /sensordata> Heat for Heat </a></li>
             </ul>`);
 });
 
