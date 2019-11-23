@@ -24,6 +24,8 @@ app.get('/', function(req, res) {
 ```
 6. Write multiple queries for aaData <br/>
 
+The final query gets an array of meetings specific to zone, day and start time. </br>
+
 ```
 app.get('/aadata', function(req, res) {
     res.send(aadata);
@@ -47,7 +49,10 @@ client.query(aadata_query1, (err, res) => {
     }
 });
 ```
+
 7. Write multiple queries for Temperature Sensor<br/>
+
+The final query gets an array of objects with the details of month, day, hour and the average temperature. </br>
 ```
 var sensordata = [];
 
@@ -79,6 +84,7 @@ var sensordata_query1= `WITH newSensorData as (SELECT time - INTERVAL '5 hours' 
     });
 ```
 8. Write queries for Process Blog <br/>
+The final query  gets an array of objects of a specific category between two dates. </br>
 ```
 app.get('/processblog', function(req, res) {
 
