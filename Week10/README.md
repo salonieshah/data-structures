@@ -49,6 +49,8 @@ client.query(aadata_query1, (err, res) => {
     }
 });
 ```
+<b> Output <b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/aa_meeting_output.JPG)<br/> <br/>
 
 7. Write multiple queries for Temperature Sensor<br/>
 
@@ -83,6 +85,9 @@ var sensordata_query1= `WITH newSensorData as (SELECT time - INTERVAL '5 hours' 
          client.end();
     });
 ```
+<b> Output <b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/sensor_output.JPG)<br/> <br/>
+   
 8. Write queries for Process Blog <br/>
 The final query  gets an array of objects of a specific category between two dates. </br>
 ```
@@ -114,3 +119,6 @@ dynamodb.query(params, function(err, data) {
 });
 });
 ```
+<b> Output <b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/blog_output.JPG)<br/> <br/>
+
