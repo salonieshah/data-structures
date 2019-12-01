@@ -29,7 +29,7 @@
 3. The user can understand and filter the data using legend on the bottom</br>
 4. The data can to be filtered on the basis of temperature location, time and intensity. </br>
 5. Sketch 1 would be the defalt view. </br>
-6. I have made an assumption that the user is using a computer or laptop due to screen proportion of interface design.</br><br/>
+6. I have made an assumption that the user is using a computer or laptop due to screen proportion of interface design. </br><br/>
 --------------------------------------------------
 
 ### C. Process Blog Interface

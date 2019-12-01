@@ -23,6 +23,9 @@ app.get('/', function(req, res) {
 });
 ```
 6. Write multiple queries for aaData <br/>
+
+The final query gets an array of meetings specific to zone, day and start time. </br>
+
 ```
 app.get('/aadata', function(req, res) {
     res.send(aadata);
@@ -46,7 +49,12 @@ client.query(aadata_query1, (err, res) => {
     }
 });
 ```
+<b> Output </b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/aa_meeting_output.JPG)<br/> <br/>
+
 7. Write multiple queries for Temperature Sensor<br/>
+
+The final query gets an array of objects with the details of month, day, hour and the average temperature. </br>
 ```
 var sensordata = [];
 
@@ -58,6 +66,15 @@ var sensordata_query1 = "SELECT * FROM tempsensor;"; // print all values
 var sensordata_query1 = "SELECT COUNT (*) FROM tempsensor;"; // print the number of rows
 var sensordata_query1 = "SELECT temperature, COUNT (*) FROM tempsensor GROUP BY temperature;"; // print the number of rows for each sensorValue
 
+var sensordata_query1= `WITH newSensorData as (SELECT time - INTERVAL '5 hours' as estTime, * FROM tempsensor)
+                        SELECT
+                            EXTRACT (MONTH FROM estTime) as sensorMonth,
+                            EXTRACT (DAY FROM estTime) as sensorDay,
+                            EXTRACT (HOUR FROM estTime) as sensorHour,
+                            AVG (temperature::int) as temperature
+                            FROM newSensorData
+                            GROUP BY sensorMonth, sensorDay, sensorHour
+                            ORDER BY sensorMonth, sensorDay, sensorHour;`;
 
     client.query(sensordata_query1, (err, res) => {
         if (err) {throw err}
@@ -68,7 +85,11 @@ var sensordata_query1 = "SELECT temperature, COUNT (*) FROM tempsensor GROUP BY 
          client.end();
     });
 ```
+<b> Output </b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/sensor_output.JPG)<br/> <br/>
+   
 8. Write queries for Process Blog <br/>
+The final query  gets an array of objects of a specific category between two dates. </br>
 ```
 app.get('/processblog', function(req, res) {
 
@@ -98,3 +119,6 @@ dynamodb.query(params, function(err, data) {
 });
 });
 ```
+<b> Output </b>
+![Data Structure](https://github.com/salonieshah/data-structures/blob/master/Week10/images/blog_output.JPG)<br/> <br/>
+
