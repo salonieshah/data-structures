@@ -1,0 +1,34 @@
+body{
+    background-color: #f2f2f2
+}
+
+@font-face {
+    font-family: "LeagueSpartan";
+    src: url("LeagueSpartan-Bold.otf") format("opentype");
+    /*font-size: 1em*/
+    }
+    
+@font-face {
+      font-family: 'Montserrat', sans-serif;  
+  }
+
+h1{
+    font-size: 2.5em;
+    /*color: black;*/
+    padding-top: 10%;
+    padding-left: 8%;
+    font-family:  "LeagueSpartan";
+}
+
+p{
+    font-size: 1.5em;
+    margin-left:8%;
+    margin-top:2%;
+    margin-right: 5%;
+    font-family: 'Montserrat';
+    line-height: 150%;
+}
+a{
+    color: black;
+}
+

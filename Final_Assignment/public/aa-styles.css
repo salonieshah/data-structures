@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "LeagueSpartan";
+    src: url("LeagueSpartan-Bold.otf") format("opentype");
+    /*font-size: 1em*/
+    }
+    
+@font-face {
+      font-family: 'Montserrat', sans-serif;  
+  }
+  
+body{
+    background-color: #f2f2f2
+}
+
+.sub-heading{
+    font-family:  "LeagueSpartan";
+    font-size: 1.2em;
+    margin-left: 5%
+    /*text-align: left;*/
+}
+
+#mapid { 
+    height: 90vh; 
+    width: 100%;
+}
+
+.name, .address, .time, .type, .accessibity{
+    font-size: 1em;
+    margin-left:5%;
+    margin-top:2%;
+    margin-right: 5%;
+    font-family: 'Montserrat';
+    line-height: 150%;
+}
+
+.leaflet-popup-content{
+    font-size: 1em;
+    font-family: 'Montserrat';
+    line-height: 200%;
+}
+
+.homepage{
+    font-size: 0.8em;
+    color: black;
+    padding-left: 65%;
+    text-align: right;
+    font-family: 'Montserrat';
+    
+}
