@@ -1,7 +1,7 @@
 @font-face {
     font-family: "LeagueSpartan";
     src: url("LeagueSpartan-Bold.otf") format("opentype");
-    /*font-size: 1em*/
+    font-size: 1em
     }
     
 @font-face {
@@ -10,8 +10,8 @@
 
 h1{
     font-size: 2.5em;
-    /*color: black;*/
-    /*padding-top: 2%;*/
+    color: black;
+    padding-top: 2%;
     padding-left: 5%;
     font-family:  "LeagueSpartan";
 }
@@ -33,61 +33,53 @@ body{
 }
 
 p{
-    padding-top: 0.5%;
-    padding-bottom: 0.5%;
+/*    padding-top: 0.5%;*/
+/*    padding-bottom: 0.5%;*/
     margin-top: 0.5%;
     margin-bottom: 0.5%;
-    text-align: left
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+/*    text-align: left*/
 }
 
 .title{
     font-family:  "LeagueSpartan";
     font-size: 1.5em;
-    padding-left: 5%;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
-    /*margin-left:5%;*/
-    /*margin-top:2%;*/
     background-color: #f2c544;
+    text-align: left
 }
 
 .category{
     font-size: 1em;
-    margin-left:5%;
-    margin-top:1%;
-    margin-right: 5%;
     font-family: 'Montserrat';
     line-height: 150%;
+    text-align: left;
+    padding-top: 1%;
+    padding-bottom: 0.5%;
 }
 
 .created{
     font-size: 1em;
-    margin-left:5%;
-    margin-top:0.5%;
-    margin-right: 5%;
     font-family: 'Montserrat';
     line-height: 150%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    text-align: left
 }
 
 .content{
     font-size: 1em;
-    margin-left:5%;
-    margin-top:1%;
-    margin-right: 3%;
     text-align: justify;
     font-family: 'Montserrat';
     line-height: 150%;
-    margin-bottom: 5%;
+    padding-top: 0.5%;
+    padding-bottom: 5%;
 }
 
-.keyword{
-    font-size: 1em;
-    margin-left:5%;
-    margin-top:2%;
-    margin-right: 5%;
-    font-family: 'Montserrat';
-    line-height: 150%;
-}
 .custom-select{
     width: 20%;
     margin-bottom: 2%;

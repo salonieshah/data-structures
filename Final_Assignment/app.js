@@ -48,10 +48,10 @@ app.get('/blog', async function (req, res) {
     return new Promise(resolve => {
         var output = {};
         
-        minDate = minDate || "August 1, 2019"
-        maxDate = maxDate || "September 10, 2019"; 
+        minDate = minDate || "August 1 2019"
+        maxDate = maxDate || "December 10 2020"; 
         category = category || 'all';
-
+// console.log(new Date(maxDate).toLocaleString())
         output.blogpost = [];
         
         if (category != 'all'){
@@ -60,8 +60,8 @@ app.get('/blog', async function (req, res) {
                 KeyConditionExpression: "category = :categoryName and created between :minDate and :maxDate", // the query expression
                 ExpressionAttributeValues: { // the query values
                     ":categoryName": {S: category},
-                    ":minDate": {S: new Date(minDate).toLocaleString()},
-                    ":maxDate": {S: new Date(maxDate).toLocaleString()},
+                    ":minDate": {S: new Date(minDate).toISOString()},
+                    ":maxDate": {S: new Date(maxDate).toISOString()},
                 }
             };
             
@@ -73,8 +73,8 @@ app.get('/blog', async function (req, res) {
                 ProjectionExpression: "created, category, content, title",
                 FilterExpression: "created between :minDate and :maxDate",
                  ExpressionAttributeValues: { // the query values
-                    ":minDate": {S: new Date(minDate).toLocaleString()},
-                    ":maxDate": {S: new Date(maxDate).toLocaleString()}
+                    ":minDate": {S: new Date(minDate).toISOString()},
+                    ":maxDate": {S: new Date(maxDate).toISOString()}
                 }
             };
             
@@ -89,9 +89,10 @@ app.get('/blog', async function (req, res) {
                 // print all the movies
                 console.log("Scan succeeded.");
                 data.Items.forEach(function(item) {
+                    // console.log(item)
                     // console.log("***** ***** ***** ***** ***** \n", item);
                       // use express to create a page with that data
-                    output.blogpost.push({'title':item.title.S, 'content':item.content.S, 'category':item.category.S,'created':item.created.S});
+                    output.blogpost.push({'title':item.title.S, 'content':item.content.S, 'category':item.category.S,'created':moment(item.created.S).format("LL")});
                 });
     
                 fs.readFile('blog-handlebars.html', 'utf8', (error, data) => {
@@ -130,15 +131,17 @@ var hx = `<!doctype html>
         <script>
             var data = 
           `;
-          
+            
             var jx = `;
             var mymap = L.map('mapid').setView([40.753636,-73.9780], 13);
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 18,
+            
+             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            	maxZoom: 18,
+            	subdomains: 'abcd',
                 id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1Ijoic2Fsb25pZXNoYWgiLCJhIjoiY2szN2xncHkxMDAwdTNzcDVrMml2a2prdyJ9.uNWsBujASus2I3VQ7SaqYQ'
-            }).addTo(mymap);
+                    }).addTo(mymap);
+                    
             for (var i=0; i<data.length; i++) {
                 L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(JSON.stringify(data[i].meetings)).addTo(mymap);
             }
@@ -151,37 +154,59 @@ var hx = `<!doctype html>
 
     var now = moment.tz(Date.now(), "America/New_York"); 
     var dayy = now.day().toString(); 
-    var hourr = now.hour().toString(); 
+    // var dayy = 'Tuesdays' 
+    var hourr = now.hour().toString();
+    var min = now.minute().toString();
+    var sec = now.second().toString();
+    var ampm = 'AM';
+    if (hourr > 12) {
+        hourr = hourr - 12;
+        ampm = 'PM'
+    }
 
+    if (hourr < 9) {
+        hourr = '0' + hourr;
+    }
+    
+     if (sec < 9) {
+        sec = '0' + sec;
+    }
     // Connect to the AWS RDS Postgres database
    
     const dayLookup = {day_0:"Sundays", day_1:"Mondays", day_2:"Tuesdays", day_3:"Wednesdays", day_4:"Thursdays", day_5:"Fridays", day_6:"Saturdays"};
     var today = dayLookup['day_'+ dayy];
+    var current_time = hourr + ':' + min + ':' + sec
+      
     // console.log('day_'+ dayy);
     // console.log(now);
     // console.log(hourr);
+    // console.log(dayy);
+    // console.log(today);
+    // console.log(ampm);
+    // console.log(sec);
+    console.log(current_time)
     
     // SQL query 
     // var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
     //              FROM aaData
     //              GROUP BY latitude, longitude, zone;`;
-    
-    var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('Meeting Name',meeting_name, 'Address', street_address, 'Start Time', meeting_start_time, 'Type', meeting_type)) as meetings
-                 FROM aaData
-                 GROUP BY latitude, longitude, zone;`;
-                 
                               
     // var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
-    //              FROM aaData
-    //             WHERE meeting_day = ` + today + //'and meeting_start_time >= ' + hourr +
-    //              `GROUP BY latitude, longitude, zone;`;
+    //             FROM aaData
+    //             WHERE Meeting_Day = '` + today + 
+    //             `' GROUP BY latitude, longitude, zone;`;
+    
+    //   var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+    //             FROM aaData
+    //             WHERE Meeting_Day = '` + today + 
+    //             `' GROUP BY latitude, longitude, zone;`;
                 
-                
-    // var thisQuery = `SELECT latitude, longitude, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
-    //               FROM aaData 
-    //               WHERE meeting_start_time = ` + hourr +  
-    //              `GROUP BY latitude, longitude
-    //              ;`;
+            //   WHERE Meeting_Day = '` + today +  'and meeting_start_time >=' + current_time + 'and meeting_time =' + ampm +
+    
+    var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+                FROM aaData
+                WHERE Meeting_Day = '` + dayy + 'and meeting_start_time >= ' + current_time +   
+                `' GROUP BY latitude, longitude, zone;`;
                         
     client.query(thisQuery, (qerr, qres) => {
         if (qerr) { throw qerr }
