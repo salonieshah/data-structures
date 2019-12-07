@@ -105,6 +105,7 @@ app.get('/blog', async function (req, res) {
     });
  }
  
+ 
 //9. Write script for generating markers on the map 
 var hx = `<!doctype html>
 <html lang="en">
@@ -141,20 +142,56 @@ var hx = `<!doctype html>
             	subdomains: 'abcd',
                 id: 'mapbox.streets',
                     }).addTo(mymap);
-                    
+            
+            
+            var html = '';
+
+                function popup (data) {
+                        for (var i=0; i<data.length; i++) {
+                            if (i === 0) {
+                                html += '<p>' + data[i].address + '</p>'
+                                html += '<p>' + data[i].access + '</p>'
+                            }
+                                    html += '<ul>'
+                                        html += '<li>' + data[i].name + '</li>'
+                                        html += '<li>' + data[i].types + '</li>'
+                                        html += '<li>' + data[i].day + '</li>'
+                                            html += '<ul>'
+                                                html += '<li>' + data[i].time + '</li>'
+                                            html += '</ul>'
+                                    html += '</ul>'
+                    }
+                    console.log(html)
+                    return html
+                }
+                
             for (var i=0; i<data.length; i++) {
-                L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(JSON.stringify(data[i].meetings)).addTo(mymap);
+                L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(popup(data[i].meetings)).addTo(mymap);
             }
+            
+            
         </script>
     </body>
 </html>`;
+    
+//   var html = '';
+
+//                 for (var i=0; i<data.length; i++) {
+//                     if (i === 0) {
+//                         html += '<h3>' + data[i].name + '</h3>';
+//                         html += '<p>' + data[i].address + '</p>'
+//                             html += '<ul>'
+//                     }
+                   
+//                     html += '<li>' + a[i].time
+//                 }
+//                 console.log(html)
     
 //10. Query all the meeting in next twenty four hours    
     app.get('/aadata', function(req, res) {
 
     var now = moment.tz(Date.now(), "America/New_York"); 
     var dayy = now.day().toString(); 
-    // var dayy = 'Tuesdays' 
     var hourr = now.hour().toString();
     var min = now.minute().toString();
     var sec = now.second().toString();
@@ -171,12 +208,18 @@ var hx = `<!doctype html>
      if (sec < 9) {
         sec = '0' + sec;
     }
-    // Connect to the AWS RDS Postgres database
-   
+    
+    if (min < 9) {
+        min = '0' + min;
+    }
+    
     const dayLookup = {day_0:"Sundays", day_1:"Mondays", day_2:"Tuesdays", day_3:"Wednesdays", day_4:"Thursdays", day_5:"Fridays", day_6:"Saturdays"};
     var today = dayLookup['day_'+ dayy];
     var current_time = hourr + ':' + min + ':' + sec
-      
+    
+    var tom = dayy * 1 +1
+    var tommorow = dayLookup['day_'+ tom]; 
+    
     // console.log('day_'+ dayy);
     // console.log(now);
     // console.log(hourr);
@@ -187,34 +230,49 @@ var hx = `<!doctype html>
     console.log(current_time)
     
     // SQL query 
-    // var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
-    //              FROM aaData
-    //              GROUP BY latitude, longitude, zone;`;
-                              
+
     // var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
     //             FROM aaData
-    //             WHERE Meeting_Day = '` + today + 
+    //             WHERE Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
+    //                                 "' and meeting_time = '" + ampm +     
     //             `' GROUP BY latitude, longitude, zone;`;
-    
-    //   var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
-    //             FROM aaData
-    //             WHERE Meeting_Day = '` + today + 
-    //             `' GROUP BY latitude, longitude, zone;`;
-                
-            //   WHERE Meeting_Day = '` + today +  'and meeting_start_time >=' + current_time + 'and meeting_time =' + ampm +
-    
-    var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+          
+        // console.log(thisQuery)
+        
+        
+        if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
                 FROM aaData
-                WHERE Meeting_Day = '` + dayy + 'and meeting_start_time >= ' + current_time +   
-                `' GROUP BY latitude, longitude, zone;`;
-                        
+                WHERE (Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
+                                    "' and meeting_time = '" + ampm +   
+                `')
+                OR (Meeting_Day = '` + today + "' and meeting_time = 'PM"+ `')
+                OR (Meeting_Day = '` + tommorow + "' and meeting_start_time <= '" + current_time + 
+                                    "' and meeting_time = '" + ampm +   
+                `')
+                GROUP BY latitude, longitude, zone;`;   
+                
+        } else if (ampm == "PM")
+                { var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+                    FROM aaData
+                    WHERE (Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
+                                        "' and meeting_time = '" + ampm +   
+                    `')
+                    OR (Meeting_Day = '` + today + "' and meeting_time = 'AM"+ `')
+                    OR (Meeting_Day = '` + tommorow + "' and meeting_start_time <= '" + current_time + 
+                                        "' and meeting_time = '" + ampm +   
+                `')
+                GROUP BY latitude, longitude, zone;`;   
+        }
+                
+        
     client.query(thisQuery, (qerr, qres) => {
         if (qerr) { throw qerr }
         
         else {
             var resp = hx + JSON.stringify(qres.rows) + jx;
             res.send(resp);
-            // client.end();
+            console.log(qres.rows)
+            client.end();
             // console.log('AA) responded to request for aa meeting data');
             // console.log(thisQuery)
             // console.log(resp)
@@ -225,32 +283,60 @@ var hx = `<!doctype html>
 //11. Query Sensor Data 
 var sensordata = [];
 
-app.get('/sensordata', function(req, res) {
-    res.send(sensordata);
-});
+// app.get('/sensordata', function(req, res) {
+//     res.send(sensordata);
+// });
 
-// var sensordata_query1 = "SELECT * FROM tempsensor;"; // print all values
-// var sensordata_query1 = "SELECT COUNT (*) FROM tempsensor;"; // print the number of rows
-// var sensordata_query1 = "SELECT temperature, COUNT (*) FROM tempsensor GROUP BY temperature;"; // print the number of rows for each sensorValue
+// // var sensordata_query1 = "SELECT * FROM tempsensor;"; // print all values
+// // var sensordata_query1 = "SELECT COUNT (*) FROM tempsensor;"; // print the number of rows
+// // var sensordata_query1 = "SELECT temperature, COUNT (*) FROM tempsensor GROUP BY temperature;"; // print the number of rows for each sensorValue
 
-var sensordata_query1= `WITH newSensorData as (SELECT time - INTERVAL '5 hours' as estTime, * FROM tempsensor)
-                        SELECT
-                            EXTRACT (MONTH FROM estTime) as sensorMonth,
-                            EXTRACT (DAY FROM estTime) as sensorDay,
-                            EXTRACT (HOUR FROM estTime) as sensorHour,
-                            AVG (temperature::int) as temperature
-                            FROM newSensorData
-                            GROUP BY sensorMonth, sensorDay, sensorHour
-                            ORDER BY sensorMonth, sensorDay, sensorHour;`;
+// var sensordata_query1= `WITH newSensorData as (SELECT time - INTERVAL '5 hours' as estTime, * FROM tempsensor)
+//                         SELECT
+//                             EXTRACT (MONTH FROM estTime) as sensorMonth,
+//                             EXTRACT (DAY FROM estTime) as sensorDay,
+//                             EXTRACT (HOUR FROM estTime) as sensorHour,
+//                             AVG (temperature::int) as temperature
+//                             FROM newSensorData
+//                             GROUP BY sensorMonth, sensorDay, sensorHour
+//                             ORDER BY sensorMonth, sensorDay, sensorHour;`;
 
-    client.query(sensordata_query1, (err, res) => {
-        if (err) {throw err}
-        else {
-            // console.table(res.rows);
-            sensordata.push(res.rows);
-        }
-        //  client.end();
-    });
+//     client.query(sensordata_query1, (err, res) => {
+//         if (err) {throw err}
+//         else {
+//             // console.table(res.rows);
+//             sensordata.push(res.rows);
+            
+//         }
+//         //  client.end();
+//     });
     
+// const indexSource = fs.readFileSync("sensor.html").toString();
+// var template = handlebars.compile(indexSource, { strict: true });
 
- 
+// app.get('/sensordata', function(req, res) {
+
+//     // Connect to the AWS RDS Postgres database
+//     const client = new Pool(db_credentials);
+
+//     // SQL query 
+//     var q = `WITH newSensorData as (SELECT time - INTERVAL '5 hours' as estTime, * FROM tempsensor)
+//                         SELECT
+//                             EXTRACT (MONTH FROM estTime) as sensorMonth,
+//                             EXTRACT (DAY FROM estTime) as sensorDay,
+//                             EXTRACT (HOUR FROM estTime) as sensorHour,
+//                             AVG (temperature::int) as temperature
+//                             FROM newSensorData
+//                             GROUP BY sensorMonth, sensorDay, sensorHour
+//                             ORDER BY sensorMonth, sensorDay, sensorHour;`;
+
+//     client.connect();
+//     client.query(q, (qerr, qres) => {
+//         if (qerr) { throw qerr }
+//         else {
+//             res.end(template({ sensordata: JSON.stringify(qres.rows)}));
+//             client.end();
+//             console.log('1) responded to request for sensor graph');
+//         }
+//     });
+// });  
