@@ -1,67 +1,145 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html>
 
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style type="text/css">
+      html { 
+      font-size: 62.5%; 
+    } 
+    
+    body {
+      margin-top: 30px;
+      font-size: 1.4rem;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 400;
+      fill: #696969;
+      text-align: center;
+      background-color: #0F1515;
+    }
+    
+    .timeLabel, .dayLabel {
+		    font-size: 1.6rem;
+		    fill: #AAAAAA;
+		    font-weight: 300;
+		}
+		a{
+    font-size: 1em;
+    color: black;
+    padding-top: 10%;
+    margin-top: 10%;
+    padding-left: 90%;
+    text-align: right;
+    font-family: 'Montserrat';
+    }
+  </style>
+</head>
 
-<div id="my_dataviz"></div>
-
+<body>
+ <p><a href='/'> Home </a></p>
+<button type="button" id = "November"> November </button>
+<button type="button" id = "December"> December </button>
+<div id="nav-container">
+    <div id="locationDropdown"></div>
+</div>
+<div id="heatmap"></div>
 <script>
-var data = {{{sensordata}}}; 
+    
+var dataset = {{{sensordata}}}
+var days = d3.range(1,31);
+var times = d3.range(24);
+  
+  var margin = {top:40, right:50, bottom:70, left:50};
+  
+  // calculate width and height based on window size
+  var w = Math.max(Math.min(window.innerWidth, 1000), 500) - margin.left - margin.right - 20,
+  gridSize = Math.floor(w / times.length),
+	h = gridSize * (days.length+2);
+  
+  // svg container
+  var svg = d3.select("#heatmap")
+  	.append("svg")
+  	.attr("width", w + margin.top + margin.bottom)
+  	.attr("height", h + margin.left + margin.right)
+  	.append("g")
+  	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  
+  // linear colour scale
+  var colours = d3.scaleLinear()
+  .range(["#eda596", "#d82435"])
+  .domain([24,34]);
+  
+  var dayLabels = svg.selectAll(".dayLabel")
+  	.data(days)
+  	.enter()
+  	.append("text")
+  	.text(function(d) { return d; })
+  	.attr("x", 0)
+  	.attr("y", function(d, i) { return i * gridSize; })
+  	.style("text-anchor", "end")
+		.attr("transform", "translate(-20," + gridSize / 1.5 + ")")
 
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 30, left: 30},
-  width = 450 - margin.left - margin.right,
-  height = 450 - margin.top - margin.bottom;
+  var timeLabels = svg.selectAll(".timeLabel")
+    .data(times)
+    .enter()
+    .append("text")
+    .text(function(d) { return d; })
+    .attr("x", function(d, i) { return i * gridSize; })
+    .attr("y", 0)
+    .style("text-anchor", "middle")
+    .attr("transform", "translate(" + gridSize / 2 + ", -6)");
+    
+    // group data by location
+    var nest = d3.nest()
+      .key(function(d) { return d.sensormonth; })
+      .entries(dataset);
+      // console.log(nest)
+      
+  //   // array of locations in the data
+    var locations = nest.map(function(d) { return d.key; });
+    var currentLocationIndex = 0;
+        console.log(locations)
+        
+    // function to create the initial heatmap
+    var drawHeatmap = function(location) {
 
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-            .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// Labels of row and columns
-// var myGroups = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-// var myVars = ["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10"]
-
-
-
-// Build X scales and axis:
-var x = d3.scaleBand()
-        .range([ 0, width ])
-        // .domain(d.sensorhour)
-        .domain(data, function(d) {return d.sensorhour;})
-        .padding(0.01);
-            svg.append("g")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
-
-// Build X scales and axis:
-var y = d3.scaleBand()
-        .range([ height, 0 ])
-        // .domain(d.sensorday)
-        .domain(data, function(d) {return d.sensorday;})
-        .padding(0.01);
-            svg.append("g")
-            .call(d3.axisLeft(y));
-
-// Build color scale
-var myColor = d3.scaleLinear()
-        .range(["white", "#69b3a2"])
-        .domain([20,40])
-
-
-  svg.selectAll()
-      .data(data, function(d) {return d.sensorday+':'+d.sensorhour;})
-      .enter()
-      .append("rect")
-      .attr("x", function(d) { return x(d.sensorday) + width })
-      .attr("y", function(d) { return y(d.sensorhour) + height })
-      .attr("width", x.bandwidth() )
-      .attr("height", y.bandwidth() )
-      .style("fill", function(d) { return myColor(d.temperature)} )
-
+      // filter the data to return object of location of interest
+      var selectLocation = nest.find(function(d) {
+        return d.key == location;
+      });
+      console.log(selectLocation)
+        var heatmap = svg.selectAll(".sensorhour")
+        .data(selectLocation.values)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) { return (d.sensorhour * 1 + 0.5) * gridSize; })
+        .attr("cy", function(d) { return (d.sensorday *1 -0.5) * gridSize; })
+        .attr("class", "hour")
+        .attr("r", gridSize/3)
+        .style("fill", function(d) { return colours(d.temperature *1); })
+      }
+    drawHeatmap(locations[currentLocationIndex])
+    
+    
+    
+    
+    
+    
+    d3.select("#November").on('click', function(){
+      d3.select('#heatmap').selectAll('.hour').remove();
+    drawHeatmap(locations[0]);
+    })
+    
+    d3.select("#December").on('click', function(){
+       d3.select('#heatmap').selectAll('.hour').remove();
+    drawHeatmap(locations[1]);
+    })
+    
+    
 
 </script>
+</body>
+    
+</html>
