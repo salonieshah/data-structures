@@ -47,3 +47,26 @@ body{
     font-family: 'Montserrat';
     
 }
+
+
+#notes { position: absolute; 
+            z-index: 99999; 
+            margin-left: 80%;
+            margin-top: 2%;
+            width: 15%;
+            background: rgba(255,255,255,0.7); 
+}
+
+#notes h1 {
+    font-size: 1.5em;
+    font-family: 'Montserrat';
+}
+
+#notes p {
+    font-size: 1em;
+    font-family: 'Montserrat';
+    line-height: 2em;
+}
+
+
+

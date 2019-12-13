@@ -15,7 +15,7 @@ db_credentials.password = '06101995';
 db_credentials.port = 5432;
 const client = new Pool(db_credentials);
 
-// 3. Credentials for Dynamodb 
+//3. Credentials for Dynamodb 
 var AWS = require('aws-sdk');
 AWS.config = new AWS.Config();
 AWS.config.region = "us-east-1";
@@ -33,7 +33,7 @@ app.listen(8080, function () {
 //6. Linking public folder
 app.use(express.static('public'));
 
-//7. Query process blog by Connect to dynamodb
+//7. Query Process Blog by Connecting to dynamodb
 app.get('/blog', async function (req, res) {
     if (req.query == {}){
         res.send(await processBlog());
@@ -51,7 +51,7 @@ app.get('/blog', async function (req, res) {
         minDate = minDate || "August 1 2019"
         maxDate = maxDate || "December 10 2020"; 
         category = category || 'all';
-// console.log(new Date(maxDate).toLocaleString())
+        // console.log(new Date(maxDate).toLocaleString())
         output.blogpost = [];
         
         if (category != 'all'){
@@ -81,17 +81,17 @@ app.get('/blog', async function (req, res) {
             dynamodb.scan(params, onScan)
 
         }
-        
+
+//9. Use express-handlebars to get the output 
+
         function onScan(err, data) {
             if (err) {
-                console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+                console.error("Error. Error JSON:", JSON.stringify(err, null, 2));
             } else {
-                // print all the movies
                 console.log("Scan succeeded.");
                 data.Items.forEach(function(item) {
                     // console.log(item)
                     // console.log("***** ***** ***** ***** ***** \n", item);
-                      // use express to create a page with that data
                     output.blogpost.push({'title':item.title.S, 'content':item.content.S, 'category':item.category.S,'created':moment(item.created.S).format("LL")});
                 });
     
@@ -125,7 +125,19 @@ var hx = `<!doctype html>
         <div class= "sub-heading">
             <p> Alcoholics Anonymous Meetings <span class = "homepage"> <a href='/'> Home </a> </span></p>
         </div>
-        <div id="mapid"></div>
+        <div id="mapid">
+        <div id = "notes">
+            <h1> Meeting Type </h1>
+            <p> 
+                B: Beginners meeting <br>
+                BB: Big Book meeting <br>
+                S: Step meeting <br>
+                OD: Open Discussion meeting <br>
+                C: Closed Discussion Meeting <br>
+                O: Open meeting <br>
+            </p>
+        </div>
+        </div>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
@@ -143,21 +155,20 @@ var hx = `<!doctype html>
                 id: 'mapbox.streets',
                     }).addTo(mymap);
             
-                
 
                 function popup (data) {
                         var html = '';
                         for (var i=0; i<data.length; i++) {
                             if (i === 0) {
-                                html += '<p>' + data[i].address + '</p>'
-                                html += '<p>' + data[i].access + '</p>'
+                                html += '<p class = "address">' + data[i].address + '</p>'
+                                html += '<p class = "access">' + data[i].access + '</p>'
                             }
                                     html += '<ul>'
-                                        html += '<li>' + data[i].name + '</li>'
-                                        html += '<li>' + data[i].types + '</li>'
-                                        html += '<li>' + data[i].day + '</li>'
+                                        html += '<li class = "name">' + data[i].name + '</li>'
+                                        html += '<li class = "type">' + data[i].types + '</li>'
+                                        html += '<li class = "day">' + data[i].day + '</li>'
                                             html += '<ul>'
-                                                html += '<li>' + data[i].time + '</li>'
+                                                html += '<li class = "time">' + data[i].time + '</li>'
                                             html += '</ul>'
                                     html += '</ul>'
                     }
@@ -166,7 +177,7 @@ var hx = `<!doctype html>
                 }
                 
                 for (var i=0; i<data.length; i++) {
-                        L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(popup(data[i].meetings)).addTo(mymap);
+                        L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(popup(data[i].meetings), {maxHeight: 250}, {maxWidth: 100}).addTo(mymap);
                     }
             
             
@@ -174,9 +185,25 @@ var hx = `<!doctype html>
     </body>
 </html>`;
 
-    // for (var i=0; i<data.length; i++) {
-                // L.marker( [data[i].latitude, data[i].longitude] ).bindPopup(JSON.stringify(data[i].meetings)).addTo(mymap);
-            // }
+//  function popup (data) {
+//                         var html = '';
+//                         for (var i=0; i<data.length; i++) {
+//                             if (i === 0) {
+//                                 html += '<p>' + data[i].address + '</p>'
+//                                 html += '<p>' + data[i].access + '</p>'
+//                             }
+//                                     html += '<ul>'
+//                                         html += '<li>' + data[i].name + '</li>'
+//                                         html += '<li>' + data[i].types + '</li>'
+//                                         html += '<li>' + data[i].day + '</li>'
+//                                             html += '<ul>'
+//                                                 html += '<li>' + data[i].time + '</li>'
+//                                             html += '</ul>'
+//                                     html += '</ul>'
+//                     }
+//                     console.log(html)
+//                     return html
+//                 }
 
 //10. Query all the meeting in next twenty four hours    
     app.get('/aadata', function(req, res) {
@@ -233,7 +260,7 @@ var hx = `<!doctype html>
         // console.log(thisQuery)
         
         
-        if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+        if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', city, 'city', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
                 FROM aaData
                 WHERE (Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
                                     "' and meeting_time = '" + ampm +   
