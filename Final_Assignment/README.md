@@ -15,3 +15,6 @@ The parsed data was inconsistent and difficult to manipulate. Hence, I decided t
 I used [TAMU Geo Services](https://geoservices.tamu.edu/) to Geocode each address of the json. An example of geocoding one of the page can be seen [here.](https://github.com/salonieshah/data-structures/tree/master/Week03). The end json was pushing into an array of objects containing each adress and its meeting details.</br>
 4. Creating a SQL database</br>
 I decided to create one SQL table to reduce vulnerabilities. I created one table containing city zone, address, city, state, zipcode, logitude, latitude, meeting name, meeting start time, meeting end time, meeting day, meeting type and accessibility.An example of the SQL database can be seen [here.](https://github.com/salonieshah/data-structures/tree/master/Week07).</br>
+5. User Interface Design </br>
+I conceptualized a design for an Interface of the AA meetings. The sketch could be seen [here.](https://github.com/salonieshah/data-structures/blob/master/Week11/Images/AA_Meetings/AA_Meeting_Interface-02.jpg)</br>
+
