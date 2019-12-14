@@ -1,0 +1,49 @@
+/*Create style for temperature sensor page*/
+
+html { 
+    font-size: 62.5%; 
+} 
+    
+body {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    fill: #696969;
+    text-align: center;
+    background-color: #363537;
+}
+
+a{
+    font-size: 1em;
+    color: white;
+    padding-top: 10%;
+    margin-top: 10%;
+    padding-left: 90%;
+    text-align: right;
+    font-family: 'Montserrat';
+}
+    
+/*Button Style*/
+
+button{
+    background-color: #CFCFEA; 
+    border: none;
+    color: black;
+    padding: 1% 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+
+
+/*Heatmap Style*/
+#heatmap{
+    font-size: 1.2em;
+    font-family: 'Montserrat';
+    color: white;
+    font-weight: bold;
+}

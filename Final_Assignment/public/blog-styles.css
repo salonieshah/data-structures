@@ -1,3 +1,5 @@
+/*Styles for Process Blog*/
+/*Fonts*/
 @font-face {
     font-family: "LeagueSpartan";
     src: url("LeagueSpartan-Bold.otf") format("opentype");
@@ -7,6 +9,11 @@
 @font-face {
       font-family: 'Montserrat', sans-serif;  
   }
+  
+/*HTML Pages*/
+body{
+    background-color: #f2f2f2
+}
 
 h1{
     font-size: 2.5em;
@@ -14,6 +21,15 @@ h1{
     padding-top: 2%;
     padding-left: 5%;
     font-family:  "LeagueSpartan";
+}
+
+p{
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 a{
@@ -26,24 +42,7 @@ a{
     font-family: 'Montserrat';
 }
 
-
-
-body{
-    background-color: #f2f2f2
-}
-
-p{
-/*    padding-top: 0.5%;*/
-/*    padding-bottom: 0.5%;*/
-    margin-top: 0.5%;
-    margin-bottom: 0.5%;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding-left: 5%;
-    padding-right: 5%;
-/*    text-align: left*/
-}
-
+/*For Each Class of the blog*/
 .title{
     font-family:  "LeagueSpartan";
     font-size: 1.5em;
@@ -80,6 +79,7 @@ p{
     padding-bottom: 5%;
 }
 
+/*Drop down*/
 .custom-select{
     width: 20%;
     margin-bottom: 2%;

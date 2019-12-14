@@ -1,3 +1,5 @@
+/*Styles for AA Page*/
+/*Fonts*/
 @font-face {
     font-family: "LeagueSpartan";
     src: url("LeagueSpartan-Bold.otf") format("opentype");
@@ -7,36 +9,10 @@
 @font-face {
       font-family: 'Montserrat', sans-serif;  
   }
-  
+
+/*HTML page*/
 body{
     background-color: #f2f2f2
-}
-
-.sub-heading{
-    font-family:  "LeagueSpartan";
-    font-size: 1.2em;
-    margin-left: 5%
-    /*text-align: left;*/
-}
-
-#mapid { 
-    height: 90vh; 
-    width: 100%;
-}
-
-.name, .address, .time, .type, .accessibity{
-    font-size: 1em;
-    margin-left:5%;
-    margin-top:2%;
-    margin-right: 5%;
-    font-family: 'Montserrat';
-    line-height: 150%;
-}
-
-.leaflet-popup-content{
-    font-size: 1em;
-    font-family: 'Montserrat';
-    line-height: 200%;
 }
 
 .homepage{
@@ -47,26 +23,48 @@ body{
     font-family: 'Montserrat';
     
 }
-
-
-#notes { position: absolute; 
-            z-index: 99999; 
-            margin-left: 80%;
-            margin-top: 2%;
-            width: 15%;
-            background: rgba(255,255,255,0.7); 
+.sub-heading{
+    font-family:  "LeagueSpartan";
+    font-size: 1.2em;
+    margin-left: 5%
+    /*text-align: left;*/
 }
 
-#notes h1 {
-    font-size: 1.5em;
-    font-family: 'Montserrat';
+/*Map Styles*/
+#mapid { 
+    height: 90vh; 
+    width: 100%;
 }
 
-#notes p {
+/*Popup Marker Style*/
+.leaflet-popup-content{
     font-size: 1em;
     font-family: 'Montserrat';
+    line-height: 200%;
     line-height: 2em;
 }
 
-
+.address {
+    font-size: 1.2em;
+    line-height: 2.4em;
+}
+.access{
+    font-size: 0.9em;
+}
+.name {
+    font-size: 1.2em;
+    text-indent: -1em;
+    line-height: 2.4em;
+}
+.type{
+    /*text-indent: 1.5em;*/
+    list-style-type: none;
+}
+.day{
+    /*text-indent: 1.5em;*/
+    list-style-type: none;
+}
+.time{
+    list-style-type: none;
+}
 

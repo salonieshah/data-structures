@@ -1,7 +1,4 @@
-body{
-    background-color: #f2f2f2
-}
-
+/*This file creates style for the landing page*/
 @font-face {
     font-family: "LeagueSpartan";
     src: url("LeagueSpartan-Bold.otf") format("opentype");
@@ -12,9 +9,12 @@ body{
       font-family: 'Montserrat', sans-serif;  
   }
 
+body{
+    background-color: #f2f2f2;
+}
+
 h1{
     font-size: 2.5em;
-    /*color: black;*/
     padding-top: 10%;
     padding-left: 8%;
     font-family:  "LeagueSpartan";

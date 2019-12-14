@@ -1,143 +1,119 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
+
+<!--This file creates a dynamic d3 heatmap for the temperatures-->
 
 <head>
   <meta charset="utf-8">
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <style type="text/css">
-      html { 
-      font-size: 62.5%; 
-    } 
-    
-    body {
-      margin-top: 30px;
-      font-size: 1.4rem;
-      font-family: 'Source Sans Pro', sans-serif;
-      font-weight: 400;
-      fill: #696969;
-      text-align: center;
-      background-color: #0F1515;
-    }
-    
-    .timeLabel, .dayLabel {
-		    font-size: 1.6rem;
-		    fill: #AAAAAA;
-		    font-weight: 300;
-		}
-		a{
-    font-size: 1em;
-    color: black;
-    padding-top: 10%;
-    margin-top: 10%;
-    padding-left: 90%;
-    text-align: right;
-    font-family: 'Montserrat';
-    }
-  </style>
+  <link rel='stylesheet' type='text/css' href='sensor-styles.css'/>
 </head>
 
 <body>
- <p><a href='/'> Home </a></p>
+<!--Create home buttonand button for months  -->
+<p><a href='/'> Home </a></p>
 <button type="button" id = "November"> November </button>
 <button type="button" id = "December"> December </button>
-<div id="nav-container">
-    <div id="locationDropdown"></div>
-</div>
+
+<!--Create a div to insert heatmap-->
 <div id="heatmap"></div>
 <script>
-    
-var dataset = {{{sensordata}}}
-var days = d3.range(1,31);
-var times = d3.range(24);
   
+  // Get data from the SQL table   
+  var dataset = {{{sensordata}}}
+  
+  // Declare variables 
+  var days = d3.range(1,31);
+  var times = d3.range(24);
   var margin = {top:40, right:50, bottom:70, left:50};
-  
-  // calculate width and height based on window size
-  var w = Math.max(Math.min(window.innerWidth, 1000), 500) - margin.left - margin.right - 20,
-  gridSize = Math.floor(w / times.length),
-	h = gridSize * (days.length+2);
-  
-  // svg container
-  var svg = d3.select("#heatmap")
-  	.append("svg")
-  	.attr("width", w + margin.top + margin.bottom)
-  	.attr("height", h + margin.left + margin.right)
-  	.append("g")
-  	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
-  // linear colour scale
-  var colours = d3.scaleLinear()
-  .range(["#eda596", "#d82435"])
-  .domain([24,34]);
-  
-  var dayLabels = svg.selectAll(".dayLabel")
-  	.data(days)
-  	.enter()
-  	.append("text")
-  	.text(function(d) { return d; })
-  	.attr("x", 0)
-  	.attr("y", function(d, i) { return i * gridSize; })
-  	.style("text-anchor", "end")
-		.attr("transform", "translate(-20," + gridSize / 1.5 + ")")
-
-  var timeLabels = svg.selectAll(".timeLabel")
-    .data(times)
-    .enter()
-    .append("text")
-    .text(function(d) { return d; })
-    .attr("x", function(d, i) { return i * gridSize; })
-    .attr("y", 0)
-    .style("text-anchor", "middle")
-    .attr("transform", "translate(" + gridSize / 2 + ", -6)");
     
-    // group data by location
+  // Calculate width and height based on window size
+    var w = Math.max(Math.min(window.innerWidth, 1000), 500) - margin.left - margin.right - 20,
+      gridSize = Math.floor(w / times.length),
+  	  h = gridSize * (days.length+2);
+    
+  // Create SVG container
+    var svg = d3.select("#heatmap")
+    	.append("svg")
+    	.attr("width", w + margin.top + margin.bottom)
+    	.attr("height", h + margin.left + margin.right)
+    	.append("g")
+    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+  // Create linear colour scale
+    var colours = d3.scaleLinear()
+      .range(["#eda596", "#d82435"])
+      .domain([24,34]);
+  
+  // Create labels for days 
+    var dayLabels = svg.selectAll(".dayLabel")
+    	.data(days)
+    	.enter()
+    	.append("text")
+    	.text(function(d) { return d; })
+    	.attr("x", 0)
+    	.attr("y", function(d, i) { return i * gridSize; })
+    	.style("text-anchor", "end")
+  		.attr("transform", "translate(-20," + gridSize / 1.5 + ")")
+  
+  // Create labels for time
+    var timeLabels = svg.selectAll(".timeLabel")
+      .data(times)
+      .enter()
+      .append("text")
+      .text(function(d) { return d; })
+      .attr("x", function(d, i) { return i * gridSize; })
+      .attr("y", 0)
+      .style("text-anchor", "middle")
+      .attr("transform", "translate(" + gridSize / 2 + ", -6)");
+      
+  // Group data by months
     var nest = d3.nest()
       .key(function(d) { return d.sensormonth; })
       .entries(dataset);
-      // console.log(nest)
-      
-  //   // array of locations in the data
+        // console.log(nest)
+        
+  // Create an array consisting of all months 
     var locations = nest.map(function(d) { return d.key; });
     var currentLocationIndex = 0;
-        console.log(locations)
-        
-    // function to create the initial heatmap
+          console.log(locations)
+          
+  // Function to create the initial heatmap
     var drawHeatmap = function(location) {
-
-      // filter the data to return object of location of interest
-      var selectLocation = nest.find(function(d) {
+  
+  // Filter the data to return monthly data
+    var selectLocation = nest.find(function(d) {
         return d.key == location;
       });
-      console.log(selectLocation)
-        var heatmap = svg.selectAll(".sensorhour")
-        .data(selectLocation.values)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) { return (d.sensorhour * 1 + 0.5) * gridSize; })
-        .attr("cy", function(d) { return (d.sensorday *1 -0.5) * gridSize; })
-        .attr("class", "hour")
-        .attr("r", gridSize/3)
-        .style("fill", function(d) { return colours(d.temperature *1); })
+        console.log(selectLocation)
+  
+  // Draw Circles for each hour in the month.
+    var heatmap = svg.selectAll(".sensorhour")
+          .data(selectLocation.values)
+          .enter()
+          .append("circle")
+          .attr("cx", function(d) { return (d.sensorhour * 1 + 0.5) * gridSize; })
+          .attr("cy", function(d) { return (d.sensorday *1 -0.5) * gridSize; })
+          .attr("class", "hour")
+          .attr("r", gridSize/3)
+          .style("fill", function(d) { return colours(d.temperature *1); })
       }
-    drawHeatmap(locations[currentLocationIndex])
-    
-    
-    
-    
-    
-    
-    d3.select("#November").on('click', function(){
-      d3.select('#heatmap').selectAll('.hour').remove();
-    drawHeatmap(locations[0]);
-    })
-    
-    d3.select("#December").on('click', function(){
-       d3.select('#heatmap').selectAll('.hour').remove();
-    drawHeatmap(locations[1]);
-    })
-    
-    
+  
+  // Call the function to create a defalt view
+      drawHeatmap(locations[currentLocationIndex])
+      
+  // Activate the data of November on click of th button of November
+      d3.select("#November").on('click', function(){
+        d3.select('#heatmap').selectAll('.hour').remove();
+        drawHeatmap(locations[0]);
+      })
+  
+  // Activate the data of December on click of button of December 
+      d3.select("#December").on('click', function(){
+        d3.select('#heatmap').selectAll('.hour').remove();
+        drawHeatmap(locations[1]);
+      })
+      
 
 </script>
 </body>

@@ -1,4 +1,5 @@
-// listen for the user changing any settings and call getResults()
+// This file updates the query and the result everytime a user interacts 
+// Listen for changes and call function
 $(function(){
     $('input').change(function() {
         getResults()
@@ -11,7 +12,7 @@ $(function(){
 
 function getResults(){
     
-    // send the current settings to the endpoint
+// Send updated settings 
     var parameters = {category: $('select[name="category"]').val()}
     $.get( '/blog',parameters, function(data) {
         
@@ -20,7 +21,6 @@ function getResults(){
     });
 }
 
-// make the call to the endpoint on pageload.
 function init(){
     getResults()
 }

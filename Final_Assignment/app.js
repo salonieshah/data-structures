@@ -106,7 +106,7 @@ app.get('/blog', async function (req, res) {
  }
  
  
-//9. Write script for generating markers on the map 
+//10. Write script for generating markers on the map 
 var hx = `<!doctype html>
 <html lang="en">
     <head>
@@ -125,19 +125,7 @@ var hx = `<!doctype html>
         <div class= "sub-heading">
             <p> Alcoholics Anonymous Meetings <span class = "homepage"> <a href='/'> Home </a> </span></p>
         </div>
-        <div id="mapid">
-        <div id = "notes">
-            <h1> Meeting Type </h1>
-            <p> 
-                B: Beginners meeting <br>
-                BB: Big Book meeting <br>
-                S: Step meeting <br>
-                OD: Open Discussion meeting <br>
-                C: Closed Discussion Meeting <br>
-                O: Open meeting <br>
-            </p>
-        </div>
-        </div>
+        <div id="mapid"></div>
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
             integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
             crossorigin=""></script>
@@ -155,23 +143,53 @@ var hx = `<!doctype html>
                 id: 'mapbox.streets',
                     }).addTo(mymap);
             
+            
 
                 function popup (data) {
                         var html = '';
+                        
                         for (var i=0; i<data.length; i++) {
-                            if (i === 0) {
-                                html += '<p class = "address">' + data[i].address + '</p>'
-                                html += '<p class = "access">' + data[i].access + '</p>'
-                            }
-                                    html += '<ul>'
-                                        html += '<li class = "name">' + data[i].name + '</li>'
-                                        html += '<li class = "type">' + data[i].types + '</li>'
-                                        html += '<li class = "day">' + data[i].day + '</li>'
-                                            html += '<ul>'
-                                                html += '<li class = "time">' + data[i].time + '</li>'
-                                            html += '</ul>'
-                                    html += '</ul>'
-                    }
+                        
+                            var wheelchair;
+                                if (data[i].access=="true"){
+                                    wheelchair = "Wheelchair Accessible"
+                                } else {
+                                    wheelchair = "No Wheelchair Access"
+                                }
+                                
+                            var type;
+                                if (data[i].types=="B"){
+                                    type = "Beginners meeting"
+                                }else if (data[i].types=="BB") {
+                                    type = "Big Book meeting"
+                                }else if (data[i].types=="S") {
+                                    type = "Step meeting"
+                                }else if (data[i].types=="OD") {
+                                    type = "Open Discussion meeting"
+                                }else if (data[i].types=="C") {
+                                    type = "Closed Discussion meeting"
+                                }else if (data[i].types=="O") {
+                                    type = "Open meeting"
+                                }else if (data[i].types=="T") {
+                                    type = "Tradition meeting"
+                                }else {
+                                    type = "General Meeting"
+                                }
+                                
+                                
+                        if (i === 0) {
+                            html += '<p class = "address">' + data[i].address + '</p>'
+                            html += '<p class = "access">' + wheelchair + '</p>'
+                        }
+                                html += '<ul>'
+                                    html += '<li class = "name">' + data[i].name + '</li>'
+                                    html += '<li class = "type">' + type + '</li>'
+                                    html += '<li class = "day">' + data[i].day + '</li>'
+                                        html += '<ul>'
+                                            html += '<li class = "time">' + data[i].time + '</li>'
+                                        html += '</ul>'
+                                html += '</ul>'
+                }
                     console.log(html)
                     return html
                 }
@@ -185,27 +203,8 @@ var hx = `<!doctype html>
     </body>
 </html>`;
 
-//  function popup (data) {
-//                         var html = '';
-//                         for (var i=0; i<data.length; i++) {
-//                             if (i === 0) {
-//                                 html += '<p>' + data[i].address + '</p>'
-//                                 html += '<p>' + data[i].access + '</p>'
-//                             }
-//                                     html += '<ul>'
-//                                         html += '<li>' + data[i].name + '</li>'
-//                                         html += '<li>' + data[i].types + '</li>'
-//                                         html += '<li>' + data[i].day + '</li>'
-//                                             html += '<ul>'
-//                                                 html += '<li>' + data[i].time + '</li>'
-//                                             html += '</ul>'
-//                                     html += '</ul>'
-//                     }
-//                     console.log(html)
-//                     return html
-//                 }
 
-//10. Query all the meeting in next twenty four hours    
+//11. Use moment to get current time and day for constructing the query    
     app.get('/aadata', function(req, res) {
 
     var now = moment.tz(Date.now(), "America/New_York"); 
@@ -232,7 +231,8 @@ var hx = `<!doctype html>
     }
     
     const client = new Pool(db_credentials);
-    
+
+//12. Construct current day, next day and current time to use in the query    
     const dayLookup = {day_0:"Sundays", day_1:"Mondays", day_2:"Tuesdays", day_3:"Wednesdays", day_4:"Thursdays", day_5:"Fridays", day_6:"Saturdays"};
     var today = dayLookup['day_'+ dayy];
     var current_time = hourr + ':' + min + ':' + sec
@@ -249,7 +249,7 @@ var hx = `<!doctype html>
     // console.log(sec);
     // console.log(current_time)
     
-    // SQL query 
+//13. SQL Query for all the meeting in next 24 hours. 
 
     // var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
     //             FROM aaData
@@ -257,7 +257,7 @@ var hx = `<!doctype html>
     //                                 "' and meeting_time = '" + ampm +     
     //             `' GROUP BY latitude, longitude, zone;`;
           
-        // console.log(thisQuery)
+    // console.log(thisQuery)
         
         
         if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', city, 'city', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
@@ -300,16 +300,16 @@ var hx = `<!doctype html>
     });
 });
 
-//11. Query Sensor Data 
+//14. Use Handlebars to create a dynamic query which live updates
 const indexSource = fs.readFileSync("sensor.html").toString();
 var template = handlebars.compile(indexSource, { strict: true });
 
 app.get('/sensordata', function(req, res) {
 
-    // Connect to the AWS RDS Postgres database
+//15. Connect to the AWS RDS Postgres database
     const client = new Pool(db_credentials);
 
-    // SQL query 
+//16. SQL query that creates a new temporary table that queries average temperature for each hour.  
     var sensordata_query = `WITH newSensorData as (SELECT time - INTERVAL '5 hours' as estTime, * FROM tempsensor)
                         SELECT
                             EXTRACT (MONTH FROM estTime) as sensorMonth,
