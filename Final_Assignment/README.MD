@@ -34,4 +34,34 @@ I used [Leaflet](https://leafletjs.com/reference-1.6.0.html) to create the base 
 
 7. Creating Query</br>
 I intended to create an app that queries all the meeting in the next 24 hours. It updates user everyday regarding meetings for all locations instead of all the meetings at once. The user has liberty to choose different location as per the convenience. The app tries not to overwhelm the user and respects the privacy of the user.</br>
-I used [Moment Timezone](https://momentjs.com/timezone/) to create a string for the current time. As my time was in 12 hour format in the database, I had to create parameter that considered AM and PM as part of the query. 
+I used [Moment Timezone](https://momentjs.com/timezone/) to create a string for the current time. As my time was in 12 hour format in the database, I had to create parameter that considered AM and PM as part of the query. <br/>
+
+```
+if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', city, 'city', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+                FROM aaData
+                WHERE (Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
+                                    "' and meeting_time = '" + ampm +   
+                `')
+                OR (Meeting_Day = '` + today + "' and meeting_time = 'PM"+ `')
+                OR (Meeting_Day = '` + tommorow + "' and meeting_start_time <= '" + current_time + 
+                                    "' and meeting_time = '" + ampm +   
+                `')
+                GROUP BY latitude, longitude, zone;`;   
+                
+        } else if (ampm == "PM")
+                { var thisQuery = `SELECT latitude, longitude, zone, json_agg(json_build_object('name',meeting_name, 'address', street_address, 'time', meeting_start_time, 'ti', meeting_time, 'day', meeting_day, 'types', meeting_type, 'access', accessibity)) as meetings
+                    FROM aaData
+                    WHERE (Meeting_Day = '` + today + "' and meeting_start_time >= '" + current_time + 
+                                        "' and meeting_time = '" + ampm +   
+                    `')
+                    OR (Meeting_Day = '` + today + "' and meeting_time = 'AM"+ `')
+                    OR (Meeting_Day = '` + tommorow + "' and meeting_start_time <= '" + current_time + 
+                                        "' and meeting_time = '" + ampm +   
+                `')
+                GROUP BY latitude, longitude, zone;`;   
+        }
+```
+This query finds the matching meeting and displays the markers and the information on the map. <br/>
+<br/>
+Due to limitation of time, I could not reach the desired user - interface design. However, after the deadline I would improve on the code and the query of my current design. <br/>
+
