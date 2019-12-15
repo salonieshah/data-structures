@@ -39,4 +39,9 @@ var sensordata_query = `WITH newSensorData as (SELECT time - INTERVAL '5 hours' 
 I designed a heat map, with X axis as the time of the day and Y axis as the date. Each circle in the map represents the average value to the that hour. The colour of the circle represents the temperature. As the colour get darker, the temperature gets warmer. <br/>
 The user can look at the data of each month by using the buttons on the top. <br/>
 <br/>
+6. Final Submission<br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_1.JPG)<br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_2.JPG)<br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_3.JPG)<br/>
+<br/>
 Due to limitation of time, I could not reach the desired user - interface design. however, after the deadline I would improve on the code and the query of my current design. <br/>
