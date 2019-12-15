@@ -14,7 +14,7 @@ I used [Photon Particle](https://docs.particle.io/quickstart/photon/) for this a
 <br/>
 
 2. Create a table with PostgreSQL<br/>
-I used PostGres database to store the values of temperature every 2 minutes. I was documenting the temperature and time.<br/>
+I used PostGres database to store the values of temperature every 2 minutes. I was documenting the temperature and time. The code for [query](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/app.js), [html and d3](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/sensor.html), [css](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/public/sensor-styles.css) are linked with respective links. <br/>
 <br/>
 
 3. PM2 Runtime<br/>
