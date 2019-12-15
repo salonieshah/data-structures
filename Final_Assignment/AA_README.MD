@@ -63,5 +63,11 @@ if (ampm == "AM"){ var thisQuery = `SELECT latitude, longitude, zone, json_agg(j
 ```
 This query finds the matching meeting and displays the markers and the information on the map. <br/>
 <br/>
+
+8. Final Submission
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/AA_Meetings.JPG) <br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/AA_Meetings_2.JPG) <br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/AA_Meetings_3.JPG) <br/>
+<br/>
 Due to limitation of time, I could not reach the desired user - interface design. However, after the deadline I would improve on the code and the query of my current design. <br/>
 
