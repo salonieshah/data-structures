@@ -14,4 +14,4 @@ The [html](https://github.com/salonieshah/data-structures/blob/master/Final_Assi
 <br/>
 <br/>
 Final Submission <br/>
-[image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/landing_page.JPG)
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/landing_page.JPG)
