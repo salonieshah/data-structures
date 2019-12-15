@@ -43,6 +43,6 @@ The user can look at the data of each month by using the buttons on the top. <br
 
 ![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_1.JPG)<br/>
 ![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_2.JPG)<br/>
-![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_3.JPG)<br
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Sensor_3.JPG)<br>
 <br/>
 Due to limitation of time, I could not reach the desired user - interface design. however, after the deadline I would improve on the code and the query of my current design. <br/>
