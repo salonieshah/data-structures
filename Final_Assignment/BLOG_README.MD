@@ -58,6 +58,12 @@ if (category != 'all'){
         }
 ```
 Each time user updates the category using the dropdown menu, the results are updated using jquery script. The handlebars file updates the contents of each entry of the resulted query. <br/>
+<br/>
+4. Final Submission <br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Process_Blog.JPG)<br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Process_Blog_2.JPG)<br/>
+![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/Process_Blog_3.JPG)<br/>
+<br/>
 Due to limitation of time, I could not reach the desired user - interface design. however, after the deadline I would improve on the code and the query of my current design. <br/>
 
 
