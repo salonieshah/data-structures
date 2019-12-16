@@ -70,4 +70,5 @@ This query finds the matching meeting and displays the markers and the informati
 ![image](https://github.com/salonieshah/data-structures/blob/master/Final_Assignment/images/AA_Meetings_3.JPG) <br/>
 <br/>
 Due to limitation of time, I could not reach the desired user - interface design. However, after the deadline I would improve on the code and the query of my current design. <br/>
-
+<br/>
+Acknowledgement : Neil Oliver
