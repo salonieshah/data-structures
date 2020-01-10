@@ -14,6 +14,7 @@
 <p><a href='/'> Home </a></p>
 <button type="button" id = "November"> November </button>
 <button type="button" id = "December"> December </button>
+<button type="button" id = "January"> January </button>
 
 <!--Create a div to insert heatmap-->
 <div id="heatmap"></div>
@@ -105,15 +106,20 @@
   // Activate the data of November on click of th button of November
       d3.select("#November").on('click', function(){
         d3.select('#heatmap').selectAll('.hour').remove();
-        drawHeatmap(locations[0]);
+        drawHeatmap(locations[1]);
       })
   
   // Activate the data of December on click of button of December 
       d3.select("#December").on('click', function(){
         d3.select('#heatmap').selectAll('.hour').remove();
-        drawHeatmap(locations[1]);
+        drawHeatmap(locations[2]);
       })
       
+  // Activate the data of January on click of button of January
+      d3.select("#January").on('click', function(){
+        d3.select('#heatmap').selectAll('.hour').remove();
+        drawHeatmap(locations[0]);
+      })
 
 </script>
 </body>
